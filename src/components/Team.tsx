@@ -51,13 +51,19 @@ const teamMembers = [
 
 const Team = () => {
   const containerRef = useRef(null);
-  const isInView = useInView(containerRef, { once: true, margin: "-100px" });
+  const isInView = useInView(containerRef, { once: true, margin: "-50px" });
 
   return (
-    <section id="team" className="py-24 lg:py-32 relative overflow-hidden">
+    <motion.section
+      initial={{ opacity: 0, y: 30 }}
+      animate={{ opacity: 1, y: 0 }}
+      exit={{ opacity: 0, y: -30 }}
+      transition={{ duration: 0.5 }}
+      className="section-container relative overflow-hidden"
+    >
       {/* Background Elements */}
-      <div className="absolute top-1/3 left-1/4 w-96 h-96 bg-primary/10 rounded-full blur-3xl" />
-      <div className="absolute bottom-1/3 right-1/4 w-96 h-96 bg-accent/10 rounded-full blur-3xl" />
+      <div className="absolute top-1/3 left-1/4 w-96 h-96 bg-primary/5 rounded-full blur-3xl" />
+      <div className="absolute bottom-1/3 right-1/4 w-96 h-96 bg-accent/5 rounded-full blur-3xl" />
 
       <div ref={containerRef} className="container mx-auto px-4 relative z-10">
         {/* Section Header */}
@@ -130,7 +136,7 @@ const Team = () => {
           ))}
         </div>
       </div>
-    </section>
+    </motion.section>
   );
 };
 

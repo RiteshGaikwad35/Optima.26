@@ -2,46 +2,39 @@ import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X } from "lucide-react";
 
-const navLinks = [
-  { name: "Home", href: "#home" },
-  { name: "About", href: "#about" },
-  { name: "Events", href: "#events" },
-  { name: "Gallery", href: "#gallery" },
-  { name: "Archive", href: "#archive" },
-  { name: "Team", href: "#team" },
+type Section = "home" | "about" | "events" | "sponsors" | "gallery" | "team" | "archive";
+
+interface HeaderProps {
+  activeSection: Section;
+  onSectionChange: (section: Section) => void;
+}
+
+const navLinks: { name: string; section: Section }[] = [
+  { name: "Home", section: "home" },
+  { name: "About", section: "about" },
+  { name: "Events", section: "events" },
+  { name: "Sponsors", section: "sponsors" },
+  { name: "Gallery", section: "gallery" },
+  { name: "Team", section: "team" },
+  { name: "Archive", section: "archive" },
 ];
 
-const Header = () => {
+const Header = ({ activeSection, onSectionChange }: HeaderProps) => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const [activeSection, setActiveSection] = useState("home");
 
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 50);
-      
-      // Update active section based on scroll position
-      const sections = navLinks.map(link => link.href.substring(1));
-      for (const section of sections.reverse()) {
-        const element = document.getElementById(section);
-        if (element) {
-          const rect = element.getBoundingClientRect();
-          if (rect.top <= 150) {
-            setActiveSection(section);
-            break;
-          }
-        }
-      }
     };
 
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const handleNavClick = (href: string) => {
+  const handleNavClick = (section: Section) => {
     setIsMobileMenuOpen(false);
-    const element = document.querySelector(href);
-    element?.scrollIntoView({ behavior: "smooth" });
+    onSectionChange(section);
   };
 
   return (
@@ -51,8 +44,8 @@ const Header = () => {
       transition={{ duration: 0.6, ease: "easeOut" }}
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
         isScrolled
-          ? "glass-card border-b border-white/5"
-          : "bg-transparent"
+          ? "glass-card border-b border-border"
+          : "bg-background/80 backdrop-blur-sm"
       }`}
     >
       <div className="container mx-auto px-4 lg:px-8">
@@ -87,16 +80,16 @@ const Header = () => {
           </motion.div>
 
           {/* Desktop Navigation */}
-          <nav className="hidden lg:flex items-center gap-8">
+          <nav className="hidden lg:flex items-center gap-6">
             {navLinks.map((link, index) => (
               <motion.button
                 key={link.name}
                 initial={{ opacity: 0, y: -20 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.4 + index * 0.1 }}
-                onClick={() => handleNavClick(link.href)}
+                transition={{ delay: 0.4 + index * 0.05 }}
+                onClick={() => handleNavClick(link.section)}
                 className={`nav-link text-sm font-medium ${
-                  activeSection === link.href.substring(1) ? "active text-primary" : ""
+                  activeSection === link.section ? "active text-primary" : ""
                 }`}
               >
                 {link.name}
@@ -111,8 +104,8 @@ const Header = () => {
             transition={{ delay: 0.2 }}
             className="hidden lg:block flex-shrink-0"
           >
-            <div className="w-12 h-12 rounded-full bg-gradient-to-br from-primary to-accent flex items-center justify-center">
-              <span className="text-lg font-display font-bold text-primary-foreground">O</span>
+            <div className="w-12 h-12 rounded-full bg-gradient-to-br from-primary to-accent flex items-center justify-center shadow-lg">
+              <span className="text-lg font-display font-bold text-card">O</span>
             </div>
           </motion.div>
 
@@ -136,7 +129,7 @@ const Header = () => {
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
             transition={{ duration: 0.3 }}
-            className="lg:hidden glass-card border-t border-white/5"
+            className="lg:hidden glass-card border-t border-border"
           >
             <nav className="container mx-auto px-4 py-6 flex flex-col gap-4">
               {navLinks.map((link, index) => (
@@ -145,9 +138,9 @@ const Header = () => {
                   initial={{ opacity: 0, x: -20 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ delay: index * 0.05 }}
-                  onClick={() => handleNavClick(link.href)}
+                  onClick={() => handleNavClick(link.section)}
                   className={`text-left py-2 text-lg font-medium transition-colors ${
-                    activeSection === link.href.substring(1)
+                    activeSection === link.section
                       ? "text-primary"
                       : "text-muted-foreground hover:text-foreground"
                   }`}

@@ -49,12 +49,18 @@ const events = [
 
 const Events = () => {
   const containerRef = useRef(null);
-  const isInView = useInView(containerRef, { once: true, margin: "-100px" });
+  const isInView = useInView(containerRef, { once: true, margin: "-50px" });
 
   return (
-    <section id="events" className="py-24 lg:py-32 relative overflow-hidden bg-gradient-to-b from-background via-secondary/20 to-background">
+    <motion.section
+      initial={{ opacity: 0, y: 30 }}
+      animate={{ opacity: 1, y: 0 }}
+      exit={{ opacity: 0, y: -30 }}
+      transition={{ duration: 0.5 }}
+      className="section-container relative overflow-hidden"
+    >
       {/* Background Elements */}
-      <div className="absolute top-1/2 left-0 w-full h-px bg-gradient-to-r from-transparent via-primary/30 to-transparent" />
+      <div className="absolute top-1/2 left-0 w-full h-px bg-gradient-to-r from-transparent via-primary/20 to-transparent" />
 
       <div ref={containerRef} className="container mx-auto px-4 relative z-10">
         {/* Section Header */}
@@ -85,7 +91,7 @@ const Events = () => {
               className="glass-card rounded-2xl p-6 lg:p-8 group hover:border-primary/30 transition-all duration-500 card-hover relative overflow-hidden"
             >
               {/* Category Badge */}
-              <span className="absolute top-4 right-4 px-3 py-1 rounded-full text-xs font-medium bg-primary/20 text-primary">
+              <span className="absolute top-4 right-4 px-3 py-1 rounded-full text-xs font-medium bg-primary/10 text-primary">
                 {event.category}
               </span>
 
@@ -126,12 +132,12 @@ const Events = () => {
           transition={{ duration: 0.6, delay: 0.8 }}
           className="text-center mt-16"
         >
-          <button className="px-8 py-4 rounded-full bg-gradient-to-r from-primary to-accent text-primary-foreground font-semibold text-lg transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-primary/30">
+          <button className="px-8 py-4 rounded-full bg-gradient-to-r from-primary to-accent text-card font-semibold text-lg transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-primary/30">
             Register for All Events
           </button>
         </motion.div>
       </div>
-    </section>
+    </motion.section>
   );
 };
 

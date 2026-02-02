@@ -1,7 +1,17 @@
 import { useEffect, useRef } from "react";
 
+interface Node {
+  x: number;
+  y: number;
+  vx: number;
+  vy: number;
+  radius: number;
+}
+
 const NetworkBackground = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
+  const animationRef = useRef<number>();
+  const nodesRef = useRef<Node[]>([]);
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -10,102 +20,105 @@ const NetworkBackground = () => {
     const ctx = canvas.getContext("2d");
     if (!ctx) return;
 
-    let animationId: number;
-    const particles: Particle[] = [];
-    const numParticles = 80;
-    const connectionDistance = 150;
-
     const resizeCanvas = () => {
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
+      canvas.width = canvas.offsetWidth * window.devicePixelRatio;
+      canvas.height = canvas.offsetHeight * window.devicePixelRatio;
+      ctx.scale(window.devicePixelRatio, window.devicePixelRatio);
     };
 
     resizeCanvas();
     window.addEventListener("resize", resizeCanvas);
 
-    class Particle {
-      x: number;
-      y: number;
-      vx: number;
-      vy: number;
-      radius: number;
-
-      constructor() {
-        this.x = Math.random() * canvas!.width;
-        this.y = Math.random() * canvas!.height;
-        this.vx = (Math.random() - 0.5) * 0.5;
-        this.vy = (Math.random() - 0.5) * 0.5;
-        this.radius = Math.random() * 2 + 1;
-      }
-
-      update() {
-        this.x += this.vx;
-        this.y += this.vy;
-
-        if (this.x < 0 || this.x > canvas!.width) this.vx *= -1;
-        if (this.y < 0 || this.y > canvas!.height) this.vy *= -1;
-      }
-
-      draw() {
-        if (!ctx) return;
-        ctx.beginPath();
-        ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
-        ctx.fillStyle = "rgba(56, 189, 248, 0.6)";
-        ctx.fill();
-      }
-    }
-
-    // Initialize particles
-    for (let i = 0; i < numParticles; i++) {
-      particles.push(new Particle());
-    }
-
-    const drawConnections = () => {
-      for (let i = 0; i < particles.length; i++) {
-        for (let j = i + 1; j < particles.length; j++) {
-          const dx = particles[i].x - particles[j].x;
-          const dy = particles[i].y - particles[j].y;
-          const distance = Math.sqrt(dx * dx + dy * dy);
-
-          if (distance < connectionDistance) {
-            const opacity = (1 - distance / connectionDistance) * 0.3;
-            ctx!.beginPath();
-            ctx!.moveTo(particles[i].x, particles[i].y);
-            ctx!.lineTo(particles[j].x, particles[j].y);
-            ctx!.strokeStyle = `rgba(56, 189, 248, ${opacity})`;
-            ctx!.lineWidth = 1;
-            ctx!.stroke();
-          }
-        }
-      }
-    };
+    // Initialize nodes
+    const nodeCount = Math.min(60, Math.floor(canvas.offsetWidth / 25));
+    nodesRef.current = Array.from({ length: nodeCount }, () => ({
+      x: Math.random() * canvas.offsetWidth,
+      y: Math.random() * canvas.offsetHeight,
+      vx: (Math.random() - 0.5) * 0.4,
+      vy: (Math.random() - 0.5) * 0.4,
+      radius: Math.random() * 2.5 + 1.5,
+    }));
 
     const animate = () => {
-      ctx!.clearRect(0, 0, canvas!.width, canvas!.height);
+      if (!ctx || !canvas) return;
 
-      particles.forEach((particle) => {
-        particle.update();
-        particle.draw();
+      ctx.clearRect(0, 0, canvas.offsetWidth, canvas.offsetHeight);
+
+      const nodes = nodesRef.current;
+
+      // Update and draw nodes
+      nodes.forEach((node, i) => {
+        // Update position
+        node.x += node.vx;
+        node.y += node.vy;
+
+        // Bounce off walls
+        if (node.x < 0 || node.x > canvas.offsetWidth) node.vx *= -1;
+        if (node.y < 0 || node.y > canvas.offsetHeight) node.vy *= -1;
+
+        // Keep in bounds
+        node.x = Math.max(0, Math.min(canvas.offsetWidth, node.x));
+        node.y = Math.max(0, Math.min(canvas.offsetHeight, node.y));
+
+        // Draw connections
+        nodes.slice(i + 1).forEach((otherNode) => {
+          const dx = node.x - otherNode.x;
+          const dy = node.y - otherNode.y;
+          const distance = Math.sqrt(dx * dx + dy * dy);
+
+          if (distance < 150) {
+            const opacity = (1 - distance / 150) * 0.2;
+            ctx.beginPath();
+            ctx.strokeStyle = `rgba(0, 207, 255, ${opacity})`;
+            ctx.lineWidth = 1;
+            ctx.moveTo(node.x, node.y);
+            ctx.lineTo(otherNode.x, otherNode.y);
+            ctx.stroke();
+          }
+        });
+
+        // Draw node glow
+        ctx.beginPath();
+        const gradient = ctx.createRadialGradient(
+          node.x,
+          node.y,
+          0,
+          node.x,
+          node.y,
+          node.radius * 3
+        );
+        gradient.addColorStop(0, "rgba(0, 207, 255, 0.5)");
+        gradient.addColorStop(0.5, "rgba(108, 99, 255, 0.2)");
+        gradient.addColorStop(1, "rgba(0, 207, 255, 0)");
+        ctx.fillStyle = gradient;
+        ctx.arc(node.x, node.y, node.radius * 3, 0, Math.PI * 2);
+        ctx.fill();
+
+        // Draw core
+        ctx.beginPath();
+        ctx.fillStyle = "rgba(0, 207, 255, 0.7)";
+        ctx.arc(node.x, node.y, node.radius * 0.6, 0, Math.PI * 2);
+        ctx.fill();
       });
 
-      drawConnections();
-
-      animationId = requestAnimationFrame(animate);
+      animationRef.current = requestAnimationFrame(animate);
     };
 
     animate();
 
     return () => {
       window.removeEventListener("resize", resizeCanvas);
-      cancelAnimationFrame(animationId);
+      if (animationRef.current) {
+        cancelAnimationFrame(animationRef.current);
+      }
     };
   }, []);
 
   return (
     <canvas
       ref={canvasRef}
-      className="absolute inset-0 w-full h-full opacity-40"
-      style={{ background: "transparent" }}
+      className="absolute inset-0 w-full h-full pointer-events-none"
+      style={{ opacity: 0.5 }}
     />
   );
 };

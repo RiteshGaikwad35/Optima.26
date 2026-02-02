@@ -39,13 +39,13 @@ const Hero = () => {
   const prevSlide = () => setCurrentSlide((prev) => (prev - 1 + slides.length) % slides.length);
 
   return (
-    <section id="home" className="relative min-h-screen flex items-center justify-center overflow-hidden">
+    <section className="relative min-h-[85vh] flex items-center justify-center overflow-hidden bg-background">
       {/* Animated Background */}
       <NetworkBackground />
       
       {/* Gradient Overlays */}
       <div className="absolute inset-0 hero-gradient" />
-      <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent" />
+      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-background" />
 
       <div className="container mx-auto px-4 pt-24 pb-12 relative z-10">
         <div className="max-w-5xl mx-auto text-center">
@@ -112,11 +112,11 @@ const Hero = () => {
             transition={{ delay: 0.6 }}
             className="flex flex-col sm:flex-row gap-4 justify-center items-center"
           >
-            <button className="group px-8 py-4 rounded-full bg-gradient-to-r from-primary to-accent text-primary-foreground font-semibold text-lg transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-primary/30 flex items-center gap-2">
+            <button className="group px-8 py-4 rounded-full bg-gradient-to-r from-primary to-accent text-card font-semibold text-lg transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-primary/30 flex items-center gap-2">
               <Play size={20} className="group-hover:scale-110 transition-transform" />
               Register Now
             </button>
-            <button className="px-8 py-4 rounded-full glass-card text-foreground font-semibold text-lg transition-all duration-300 hover:bg-white/10 border border-white/10">
+            <button className="px-8 py-4 rounded-full glass-card text-foreground font-semibold text-lg transition-all duration-300 hover:bg-muted border border-border">
               Explore Events
             </button>
           </motion.div>
@@ -125,9 +125,9 @@ const Hero = () => {
           <div className="flex items-center justify-center gap-4 mt-12">
             <button
               onClick={prevSlide}
-              className="p-2 rounded-full glass-card hover:bg-white/10 transition-colors"
+              className="p-2 rounded-full glass-card hover:bg-muted transition-colors"
             >
-              <ChevronLeft size={24} />
+              <ChevronLeft size={24} className="text-foreground" />
             </button>
             <div className="flex gap-2">
               {slides.map((_, index) => (
@@ -144,29 +144,13 @@ const Hero = () => {
             </div>
             <button
               onClick={nextSlide}
-              className="p-2 rounded-full glass-card hover:bg-white/10 transition-colors"
+              className="p-2 rounded-full glass-card hover:bg-muted transition-colors"
             >
-              <ChevronRight size={24} />
+              <ChevronRight size={24} className="text-foreground" />
             </button>
           </div>
         </div>
       </div>
-
-      {/* Scroll Indicator */}
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 1 }}
-        className="absolute bottom-8 left-1/2 -translate-x-1/2"
-      >
-        <motion.div
-          animate={{ y: [0, 10, 0] }}
-          transition={{ duration: 1.5, repeat: Infinity }}
-          className="w-6 h-10 rounded-full border-2 border-muted-foreground/30 flex justify-center pt-2"
-        >
-          <div className="w-1.5 h-3 rounded-full bg-primary" />
-        </motion.div>
-      </motion.div>
     </section>
   );
 };
