@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
-import { GraduationCap, BookOpen, Users, Award, Cpu, Database, Target, Lightbulb, Code, Brain, Globe, Shield } from "lucide-react";
+import { GraduationCap, BookOpen, Users, Award, Cpu, Database, Target, Code, Brain, Globe, Shield, Sparkles } from "lucide-react";
 import { forwardRef } from "react";
+import AnimatedCounter from "./AnimatedCounter";
 
 const curriculumAreas = [
   { icon: Brain, label: "Artificial Intelligence" },
@@ -12,10 +13,10 @@ const curriculumAreas = [
 ];
 
 const stats = [
-  { icon: Users, value: "20+", label: "Doctorate Faculty" },
-  { icon: GraduationCap, value: "Top 5", label: "MCA Programs" },
-  { icon: Award, value: "30+", label: "Years Excellence" },
-  { icon: BookOpen, value: "3", label: "Premier Courses" },
+  { icon: Users, value: 20, suffix: "+", label: "Doctorate Faculty", isNumber: true },
+  { icon: GraduationCap, value: 5, prefix: "Top ", label: "MCA Programs", isNumber: true },
+  { icon: Award, value: 30, suffix: "+", label: "Years Excellence", isNumber: true },
+  { icon: BookOpen, value: 3, suffix: "", label: "Premier Courses", isNumber: true },
 ];
 
 const DepartmentInfo = forwardRef<HTMLElement>((_, ref) => {
@@ -55,19 +56,39 @@ const DepartmentInfo = forwardRef<HTMLElement>((_, ref) => {
           transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
           className="text-center mb-16"
         >
-          <motion.span 
+          <motion.div 
             initial={{ opacity: 0, scale: 0.9 }}
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
-            className="inline-block px-5 py-2 rounded-full bg-primary/10 text-primary text-sm font-semibold mb-6 tracking-wide"
+            className="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-gradient-to-r from-primary/20 to-accent/20 border border-primary/30 text-primary text-sm font-semibold mb-6 tracking-wide"
           >
+            <motion.div
+              animate={{ rotate: [0, 15, -15, 0] }}
+              transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+            >
+              <Sparkles className="w-4 h-4" />
+            </motion.div>
             About the Department
-          </motion.span>
+          </motion.div>
           <h2 className="text-3xl md:text-4xl lg:text-5xl font-display font-bold text-foreground mb-6">
-            Department of <span className="gradient-text">Computer Applications</span>
+            Department of{" "}
+            <span className="relative inline-block">
+              <span className="bg-gradient-to-r from-primary via-accent to-primary bg-clip-text text-transparent">
+                Computer Applications
+              </span>
+              <motion.span
+                className="absolute -bottom-2 left-0 w-full h-1 bg-gradient-to-r from-primary via-accent to-primary rounded-full"
+                initial={{ scaleX: 0 }}
+                whileInView={{ scaleX: 1 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.8, delay: 0.3 }}
+              />
+            </span>
           </h2>
-          <div className="w-24 h-1 bg-gradient-to-r from-primary via-accent to-primary mx-auto mb-6 rounded-full" />
+          <p className="text-muted-foreground max-w-2xl mx-auto">
+            A <span className="text-foreground font-semibold">pioneering department</span> offering premier IT education
+          </p>
         </motion.div>
 
         {/* Stats Row */}
@@ -82,16 +103,36 @@ const DepartmentInfo = forwardRef<HTMLElement>((_, ref) => {
             <motion.div
               key={index}
               variants={itemVariants}
-              className="glass-card-elevated rounded-2xl p-6 text-center group hover:border-primary/30 transition-all duration-500"
+              className="relative glass-card-elevated rounded-2xl p-6 text-center group hover:border-primary/30 transition-all duration-500 overflow-hidden"
+              whileHover={{ scale: 1.02, y: -5 }}
             >
-              <div className="p-3 rounded-xl bg-primary/10 w-fit mx-auto mb-4 group-hover:bg-primary/20 group-hover:scale-110 transition-all duration-500">
-                <stat.icon className="w-6 h-6 text-primary" />
-              </div>
-              <div className="text-3xl md:text-4xl font-display font-bold gradient-text mb-2">
-                {stat.value}
-              </div>
-              <div className="text-sm md:text-base text-muted-foreground font-medium">
-                {stat.label}
+              {/* Animated background glow */}
+              <motion.div
+                className="absolute inset-0 bg-gradient-to-br from-primary/5 to-accent/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+              />
+              
+              <div className="relative z-10">
+                <motion.div 
+                  className="p-3 rounded-xl bg-gradient-to-br from-primary/10 to-accent/10 w-fit mx-auto mb-4 group-hover:scale-110 transition-all duration-500"
+                  whileHover={{ rotate: [0, -10, 10, 0] }}
+                  transition={{ duration: 0.5 }}
+                >
+                  <stat.icon className="w-6 h-6 text-primary" />
+                </motion.div>
+                <div className="text-3xl md:text-4xl font-display font-bold mb-2">
+                  <span className="bg-gradient-to-r from-primary via-accent to-primary bg-clip-text text-transparent">
+                    {stat.prefix && <span>{stat.prefix}</span>}
+                    <AnimatedCounter 
+                      end={stat.value} 
+                      suffix={stat.suffix} 
+                      duration={2.5}
+                      className="bg-gradient-to-r from-primary via-accent to-primary bg-clip-text text-transparent"
+                    />
+                  </span>
+                </div>
+                <div className="text-sm md:text-base text-muted-foreground font-medium">
+                  {stat.label}
+                </div>
               </div>
             </motion.div>
           ))}
@@ -107,73 +148,125 @@ const DepartmentInfo = forwardRef<HTMLElement>((_, ref) => {
         >
           {/* Left Column - Main Description */}
           <motion.div variants={itemVariants} className="space-y-6">
-            <div className="luxury-card rounded-2xl p-8">
-              <div className="flex items-center gap-3 mb-6">
-                <div className="p-3 rounded-xl bg-gradient-to-br from-primary/10 to-accent/10">
+            <motion.div 
+              className="luxury-card rounded-2xl p-8 relative overflow-hidden group"
+              whileHover={{ y: -5 }}
+              transition={{ type: "spring", stiffness: 300 }}
+            >
+              <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-bl from-primary/10 to-transparent rounded-bl-full" />
+              <div className="flex items-center gap-3 mb-6 relative z-10">
+                <motion.div 
+                  className="p-3 rounded-xl bg-gradient-to-br from-primary/10 to-accent/10"
+                  whileHover={{ rotate: 360 }}
+                  transition={{ duration: 0.5 }}
+                >
                   <GraduationCap className="w-6 h-6 text-primary" />
-                </div>
-                <h3 className="font-display font-bold text-xl text-foreground">Premier Institution</h3>
+                </motion.div>
+                <h3 className="font-display font-bold text-xl text-foreground">
+                  Premier <span className="text-primary">Institution</span>
+                </h3>
               </div>
-              <p className="text-muted-foreground leading-relaxed mb-4">
-                The Department of Computer Applications is a pioneering department within the institution, offering premier Information Technology courses, including the Master of Computer Applications (MCA), Master of Science in Computer Science, and M.Tech in Data Analytics.
+              <p className="text-muted-foreground leading-relaxed mb-4 relative z-10">
+                The Department of Computer Applications is a <span className="text-foreground font-semibold">pioneering department</span> within the institution, offering premier IT courses, including the <span className="text-primary font-medium">Master of Computer Applications (MCA)</span>, <span className="text-primary font-medium">Master of Science in Computer Science</span>, and <span className="text-primary font-medium">M.Tech in Data Analytics</span>.
               </p>
-              <p className="text-muted-foreground leading-relaxed">
-                Recognized among the top five MCA programs in the country, the department is committed to delivering high-quality education that blends robust theoretical foundations with extensive practical training.
+              <p className="text-muted-foreground leading-relaxed relative z-10">
+                Recognized among the <span className="text-foreground font-bold">top five MCA programs</span> in the country, committed to delivering <span className="text-foreground font-medium">high-quality education</span> that blends robust theoretical foundations with extensive practical training.
               </p>
-            </div>
+            </motion.div>
 
-            <div className="luxury-card rounded-2xl p-8">
-              <div className="flex items-center gap-3 mb-6">
-                <div className="p-3 rounded-xl bg-gradient-to-br from-primary/10 to-accent/10">
+            <motion.div 
+              className="luxury-card rounded-2xl p-8 relative overflow-hidden group"
+              whileHover={{ y: -5 }}
+              transition={{ type: "spring", stiffness: 300 }}
+            >
+              <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-bl from-accent/10 to-transparent rounded-bl-full" />
+              <div className="flex items-center gap-3 mb-6 relative z-10">
+                <motion.div 
+                  className="p-3 rounded-xl bg-gradient-to-br from-primary/10 to-accent/10"
+                  whileHover={{ rotate: 360 }}
+                  transition={{ duration: 0.5 }}
+                >
                   <Users className="w-6 h-6 text-primary" />
-                </div>
-                <h3 className="font-display font-bold text-xl text-foreground">Expert Faculty</h3>
+                </motion.div>
+                <h3 className="font-display font-bold text-xl text-foreground">
+                  Expert <span className="text-primary">Faculty</span>
+                </h3>
               </div>
-              <p className="text-muted-foreground leading-relaxed mb-4">
-                Comprising over 20 faculty members, all holding doctorate degrees, the department actively engages in research and project work alongside teaching. Faculty dedication is reflected in successful student placements and the production of Ph.D. graduates.
+              <p className="text-muted-foreground leading-relaxed mb-4 relative z-10">
+                Comprising over <span className="text-primary font-bold">20+ faculty members</span>, all holding <span className="text-foreground font-semibold">doctorate degrees</span>, the department actively engages in research and project work alongside teaching. Faculty dedication is reflected in successful student placements.
               </p>
-              <p className="text-muted-foreground leading-relaxed">
-                To keep pace with rapidly evolving technology, faculty participate in ongoing professional development through refresher courses and symposia, ensuring they remain at the forefront of the latest advancements in the field.
+              <p className="text-muted-foreground leading-relaxed relative z-10">
+                To keep pace with rapidly evolving technology, faculty participate in <span className="text-foreground font-medium">ongoing professional development</span> through refresher courses and symposia, ensuring they remain at the <span className="text-primary font-medium">forefront of advancements</span>.
               </p>
-            </div>
+            </motion.div>
           </motion.div>
 
           {/* Right Column - Additional Info */}
           <motion.div variants={itemVariants} className="space-y-6">
-            <div className="luxury-card rounded-2xl p-8">
-              <div className="flex items-center gap-3 mb-6">
-                <div className="p-3 rounded-xl bg-gradient-to-br from-primary/10 to-accent/10">
+            <motion.div 
+              className="luxury-card rounded-2xl p-8 relative overflow-hidden"
+              whileHover={{ y: -5 }}
+              transition={{ type: "spring", stiffness: 300 }}
+            >
+              <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-bl from-primary/10 to-transparent rounded-bl-full" />
+              <div className="flex items-center gap-3 mb-6 relative z-10">
+                <motion.div 
+                  className="p-3 rounded-xl bg-gradient-to-br from-primary/10 to-accent/10"
+                  whileHover={{ rotate: 360 }}
+                  transition={{ duration: 0.5 }}
+                >
                   <BookOpen className="w-6 h-6 text-primary" />
-                </div>
-                <h3 className="font-display font-bold text-xl text-foreground">Comprehensive Curriculum</h3>
+                </motion.div>
+                <h3 className="font-display font-bold text-xl text-foreground">
+                  Comprehensive <span className="text-primary">Curriculum</span>
+                </h3>
               </div>
-              <p className="text-muted-foreground leading-relaxed mb-6">
-                The curriculum is designed to provide a comprehensive understanding of both theoretical concepts and practical applications. Students have the opportunity to work on industry-relevant projects, enhancing their skills and preparing them for the workforce.
+              <p className="text-muted-foreground leading-relaxed mb-6 relative z-10">
+                The curriculum provides a <span className="text-foreground font-semibold">comprehensive understanding</span> of both theoretical concepts and practical applications. Students work on <span className="text-primary font-medium">industry-relevant projects</span>, preparing them for the workforce.
               </p>
-              <div className="grid grid-cols-2 gap-3">
+              <div className="grid grid-cols-2 gap-3 relative z-10">
                 {curriculumAreas.map((area, index) => (
-                  <div key={index} className="flex items-center gap-2 p-2 rounded-lg bg-secondary/50">
+                  <motion.div 
+                    key={index} 
+                    className="flex items-center gap-2 p-3 rounded-lg bg-gradient-to-r from-secondary/50 to-secondary/30 border border-primary/10 hover:border-primary/30 transition-colors"
+                    whileHover={{ scale: 1.02, x: 5 }}
+                    initial={{ opacity: 0, x: -20 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: index * 0.1 }}
+                  >
                     <area.icon className="w-4 h-4 text-primary" />
                     <span className="text-sm text-foreground font-medium">{area.label}</span>
-                  </div>
+                  </motion.div>
                 ))}
               </div>
-            </div>
+            </motion.div>
 
-            <div className="luxury-card rounded-2xl p-8">
-              <div className="flex items-center gap-3 mb-6">
-                <div className="p-3 rounded-xl bg-gradient-to-br from-primary/10 to-accent/10">
+            <motion.div 
+              className="luxury-card rounded-2xl p-8 relative overflow-hidden"
+              whileHover={{ y: -5 }}
+              transition={{ type: "spring", stiffness: 300 }}
+            >
+              <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-bl from-accent/10 to-transparent rounded-bl-full" />
+              <div className="flex items-center gap-3 mb-6 relative z-10">
+                <motion.div 
+                  className="p-3 rounded-xl bg-gradient-to-br from-primary/10 to-accent/10"
+                  whileHover={{ rotate: 360 }}
+                  transition={{ duration: 0.5 }}
+                >
                   <Award className="w-6 h-6 text-primary" />
-                </div>
-                <h3 className="font-display font-bold text-xl text-foreground">Holistic Development</h3>
+                </motion.div>
+                <h3 className="font-display font-bold text-xl text-foreground">
+                  Holistic <span className="text-primary">Development</span>
+                </h3>
               </div>
-              <p className="text-muted-foreground leading-relaxed mb-4">
-                Students are encouraged to develop organizational skills and teamwork through seminars and group discussions, alongside maintaining strong academic performance. The department also emphasizes participation in co-curricular and extracurricular activities.
+              <p className="text-muted-foreground leading-relaxed mb-4 relative z-10">
+                Students develop <span className="text-foreground font-semibold">organizational skills</span> and <span className="text-foreground font-semibold">teamwork</span> through seminars and group discussions. The department emphasizes <span className="text-primary font-medium">co-curricular and extracurricular activities</span>.
               </p>
-              <p className="text-muted-foreground leading-relaxed">
-                Regular workshops, hackathons, and coding competitions provide platforms for students to showcase their skills and collaborate on innovative solutions.
+              <p className="text-muted-foreground leading-relaxed relative z-10">
+                Regular <span className="text-primary font-bold">workshops</span>, <span className="text-primary font-bold">hackathons</span>, and <span className="text-primary font-bold">coding competitions</span> provide platforms for students to showcase their skills.
               </p>
-            </div>
+            </motion.div>
           </motion.div>
         </motion.div>
 
