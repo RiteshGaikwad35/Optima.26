@@ -73,9 +73,6 @@ const Team = () => {
           transition={{ duration: 0.6 }}
           className="text-center mb-16"
         >
-          <span className="inline-block px-4 py-2 rounded-full glass-card text-sm text-primary font-medium mb-4">
-            The Minds Behind OPTIMA
-          </span>
           <h2 className="section-title">Our Team</h2>
           <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
             Meet the dedicated individuals who work tirelessly to make OPTIMA 

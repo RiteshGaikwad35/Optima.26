@@ -4,56 +4,21 @@ import { Calendar, Trophy, Users, X, ChevronRight, Star } from "lucide-react";
 
 const archives = [
   {
-    year: "2024",
+
     theme: "Optimizing Tomorrow",
     image: "https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=600&h=400&fit=crop",
-    participants: "1200+",
-    events: 12,
-    highlights: [
-      "Record-breaking hackathon participation",
-      "Industry partnerships with 15+ companies",
-      "International guest speakers from MIT & Stanford",
-    ],
-    winners: ["Team Quantum - Hackathon", "Aravind Kumar - Paper Presentation"],
   },
   {
-    year: "2023",
     theme: "The Algorithm Revolution",
     image: "https://images.unsplash.com/photo-1505373877841-8d25f7d46678?w=600&h=400&fit=crop",
-    participants: "900+",
-    events: 10,
-    highlights: [
-      "First hybrid event with virtual participation",
-      "Launch of OR research symposium",
-      "Student-led workshops on ML optimization",
-    ],
-    winners: ["Team Nexus - Code Challenge", "Priya Sharma - Best Innovation"],
   },
   {
-    year: "2022",
     theme: "Network Flows & Beyond",
     image: "https://images.unsplash.com/photo-1591115765373-5207764f72e7?w=600&h=400&fit=crop",
-    participants: "750+",
-    events: 8,
-    highlights: [
-      "Post-pandemic in-person return",
-      "New logistics optimization track",
-      "Alumni mentorship program launched",
-    ],
-    winners: ["Team Alpha - Quiz", "Rahul Menon - Best Paper"],
   },
   {
-    year: "2021",
     theme: "Virtual Optimization",
     image: "https://images.unsplash.com/photo-1523580494863-6f3031224c94?w=600&h=400&fit=crop",
-    participants: "500+",
-    events: 6,
-    highlights: [
-      "Fully virtual edition during pandemic",
-      "24-hour global hackathon",
-      "Introduction of AI optimization track",
-    ],
-    winners: ["Team Binary - Hackathon", "Sneha Patel - Ideathon"],
   },
 ];
 
@@ -86,21 +51,13 @@ const Archive = () => {
           transition={{ duration: 0.6 }}
           className="text-center mb-16"
         >
-          <span className="inline-block px-4 py-2 rounded-full glass-card text-sm text-primary font-medium mb-4">
-            Legacy
-          </span>
-          <h2 className="section-title">OPTIMA Archives</h2>
-          <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
-            Explore the rich history of OPTIMA through the years — 
-            each edition building on the legacy of innovation and excellence.
-          </p>
+          <h2 className="section-title">Gallery</h2>
         </motion.div>
 
         {/* Archive Cards */}
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
           {archives.map((archive, index) => (
             <motion.div
-              key={archive.year}
               initial={{ opacity: 0, y: 40 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.5, delay: index * 0.1 }}
@@ -111,13 +68,10 @@ const Archive = () => {
               <div className="relative aspect-[4/3] overflow-hidden">
                 <img
                   src={archive.image}
-                  alt={`OPTIMA ${archive.year}`}
+                  alt={`OPTIMA `}
                   className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-card via-card/50 to-transparent" />
-                <div className="absolute bottom-4 left-4">
-                  <span className="text-4xl font-display font-bold gradient-text">{archive.year}</span>
-                </div>
               </div>
 
               {/* Content */}
@@ -126,14 +80,8 @@ const Archive = () => {
                   {archive.theme}
                 </h3>
                 <div className="flex items-center gap-4 text-sm text-muted-foreground mb-4">
-                  <span className="flex items-center gap-1">
-                    <Users className="w-4 h-4" />
-                    {archive.participants}
-                  </span>
-                  <span className="flex items-center gap-1">
-                    <Calendar className="w-4 h-4" />
-                    {archive.events} Events
-                  </span>
+                  
+                  
                 </div>
                 <button className="flex items-center gap-1 text-primary text-sm font-medium group-hover:gap-2 transition-all">
                   View Details
@@ -166,7 +114,7 @@ const Archive = () => {
                 <div className="relative aspect-video">
                   <img
                     src={selectedArchive.image}
-                    alt={`OPTIMA ${selectedArchive.year}`}
+                    alt={`OPTIMA `}
                     className="w-full h-full object-cover"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-card to-transparent" />
@@ -177,7 +125,7 @@ const Archive = () => {
                     <X className="w-5 h-5 text-foreground" />
                   </button>
                   <div className="absolute bottom-6 left-6">
-                    <span className="text-5xl font-display font-bold gradient-text">{selectedArchive.year}</span>
+                    <span className="text-5xl font-display font-bold gradient-text"></span>
                     <h3 className="text-2xl font-display font-semibold text-foreground mt-2">
                       {selectedArchive.theme}
                     </h3>
@@ -190,12 +138,12 @@ const Archive = () => {
                   <div className="flex gap-8 mb-8">
                     <div className="flex items-center gap-2">
                       <Users className="w-5 h-5 text-primary" />
-                      <span className="font-semibold">{selectedArchive.participants}</span>
+                      <span className="font-semibold"></span>
                       <span className="text-muted-foreground">Participants</span>
                     </div>
                     <div className="flex items-center gap-2">
                       <Calendar className="w-5 h-5 text-primary" />
-                      <span className="font-semibold">{selectedArchive.events}</span>
+                      <span className="font-semibold"></span>
                       <span className="text-muted-foreground">Events</span>
                     </div>
                   </div>
@@ -206,14 +154,6 @@ const Archive = () => {
                       <Star className="w-5 h-5 text-primary" />
                       Key Highlights
                     </h4>
-                    <ul className="space-y-2">
-                      {selectedArchive.highlights.map((highlight, index) => (
-                        <li key={index} className="flex items-start gap-2 text-muted-foreground">
-                          <ChevronRight className="w-4 h-4 text-primary mt-1 flex-shrink-0" />
-                          {highlight}
-                        </li>
-                      ))}
-                    </ul>
                   </div>
 
                   {/* Winners */}
@@ -222,13 +162,6 @@ const Archive = () => {
                       <Trophy className="w-5 h-5 text-primary" />
                       Notable Winners
                     </h4>
-                    <div className="flex flex-wrap gap-2">
-                      {selectedArchive.winners.map((winner, index) => (
-                        <span key={index} className="px-4 py-2 rounded-full glass-card text-sm">
-                          {winner}
-                        </span>
-                      ))}
-                    </div>
                   </div>
                 </div>
               </motion.div>
