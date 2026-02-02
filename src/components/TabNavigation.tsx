@@ -19,20 +19,20 @@ const tabs: { name: string; section: Section }[] = [
 
 const TabNavigation = ({ activeSection, onSectionChange }: TabNavigationProps) => {
   return (
-    <nav className="bg-card/80 backdrop-blur-md border-b border-border sticky top-20 z-40">
+    <nav className="bg-card/95 backdrop-blur-lg border-b border-border/50 sticky top-20 z-40 shadow-sm">
       <div className="container mx-auto px-4">
-        <div className="flex items-center justify-center gap-1 md:gap-2 overflow-x-auto scrollbar-hide py-2">
+        <div className="flex items-center justify-center gap-1 md:gap-3 overflow-x-auto scrollbar-hide py-3">
           {tabs.map((tab) => (
             <button
               key={tab.section}
               onClick={() => onSectionChange(tab.section)}
-              className="relative px-4 md:px-6 py-3 text-sm md:text-base font-medium transition-colors whitespace-nowrap"
+              className="relative px-5 md:px-7 py-3 text-sm md:text-base font-medium transition-all duration-500 whitespace-nowrap group"
             >
               <span
-                className={`relative z-10 transition-colors duration-300 ${
+                className={`relative z-10 transition-all duration-500 ${
                   activeSection === tab.section
-                    ? "text-primary"
-                    : "text-muted-foreground hover:text-foreground"
+                    ? "text-primary font-semibold"
+                    : "text-muted-foreground group-hover:text-primary"
                 }`}
               >
                 {tab.name}
@@ -40,14 +40,18 @@ const TabNavigation = ({ activeSection, onSectionChange }: TabNavigationProps) =
               {activeSection === tab.section && (
                 <motion.div
                   layoutId="activeTab"
-                  className="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r from-primary via-accent to-primary"
+                  className="absolute bottom-0 left-2 right-2 h-0.5 bg-gradient-to-r from-primary via-accent to-primary rounded-full"
                   initial={false}
                   transition={{
                     type: "spring",
-                    stiffness: 500,
-                    damping: 30,
+                    stiffness: 400,
+                    damping: 35,
                   }}
                 />
+              )}
+              {/* Hover indicator for inactive tabs */}
+              {activeSection !== tab.section && (
+                <span className="absolute bottom-0 left-1/2 -translate-x-1/2 w-0 h-0.5 bg-primary/30 group-hover:w-1/2 transition-all duration-500 rounded-full" />
               )}
             </button>
           ))}
