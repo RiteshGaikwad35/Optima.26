@@ -57,6 +57,9 @@ const Index = () => {
     }
   };
 
+  // Show DepartmentInfo only on home and about pages
+  const showDepartmentInfo = activeSection === "home" || activeSection === "about";
+
   return (
     <div className="min-h-screen bg-background text-foreground overflow-x-hidden">
       {/* Fixed Header */}
@@ -73,8 +76,8 @@ const Index = () => {
       {/* Split Hero Section - Always Visible */}
       <SplitHeroSection />
 
-      {/* Department Info - Always Visible */}
-      <DepartmentInfo ref={departmentRef} />
+      {/* Department Info - Only on Home and About pages */}
+      {showDepartmentInfo && <DepartmentInfo ref={departmentRef} />}
 
       {/* Dynamic Section Content */}
       <div ref={contentRef}>
