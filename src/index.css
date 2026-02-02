@@ -6,59 +6,67 @@
 
 @layer base {
   :root {
-    /* White Premium Tech Theme */
-    --background: 220 20% 98%;
-    --foreground: 228 24% 12%;
+    /* Premium Luxury White + Platinum Tech Theme */
+    --background: 220 14% 97%; /* Pearl White #F5F6F8 */
+    --foreground: 222 17% 12%; /* Charcoal Black #1A1D24 */
 
-    --card: 0 0% 100%;
-    --card-foreground: 228 24% 12%;
+    --card: 0 0% 100%; /* Pure White #FFFFFF */
+    --card-foreground: 222 17% 12%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 228 24% 12%;
+    --popover-foreground: 222 17% 12%;
 
-    --primary: 192 100% 50%;
-    --primary-foreground: 228 24% 12%;
+    --primary: 218 66% 36%; /* Royal Blue #1F4B99 */
+    --primary-foreground: 0 0% 100%;
 
-    --secondary: 220 14% 96%;
-    --secondary-foreground: 228 24% 12%;
+    --secondary: 220 20% 95%; /* Platinum Gray #EEF1F5 */
+    --secondary-foreground: 222 17% 12%;
 
-    --muted: 220 14% 90%;
-    --muted-foreground: 219 20% 40%;
+    --muted: 220 20% 95%;
+    --muted-foreground: 220 11% 42%; /* Ash Gray #606978 */
 
-    --accent: 249 68% 60%;
-    --accent-foreground: 0 0% 100%;
+    --accent: 181 68% 50%; /* Platinum Cyan #2CCED2 */
+    --accent-foreground: 222 17% 12%;
 
     --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 100%;
 
     --border: 220 20% 90%;
     --input: 220 20% 90%;
-    --ring: 192 100% 50%;
+    --ring: 218 66% 36%;
 
     --radius: 0.75rem;
 
-    /* Custom OPTIMA Light Theme Tokens */
-    --gradient-primary: linear-gradient(135deg, hsl(192 100% 50%) 0%, hsl(249 68% 60%) 100%);
-    --gradient-light: linear-gradient(180deg, hsl(220 20% 98%) 0%, hsl(0 0% 100%) 100%);
-    --gradient-hero: radial-gradient(ellipse at 50% 0%, hsl(192 100% 50% / 0.12) 0%, transparent 60%);
-    --gradient-card: linear-gradient(135deg, hsl(0 0% 100% / 0.9) 0%, hsl(220 14% 96% / 0.8) 100%);
+    /* Custom OPTIMA Luxury Theme Tokens */
+    --gold: 42 52% 54%; /* Soft Gold #C9A24D */
     
-    --glow-primary: 0 0 60px hsl(192 100% 50% / 0.25);
-    --glow-accent: 0 0 60px hsl(249 68% 60% / 0.2);
-    --glow-card: 0 8px 40px hsl(228 24% 12% / 0.06);
+    --gradient-primary: linear-gradient(135deg, hsl(218 66% 36%) 0%, hsl(181 68% 50%) 100%);
+    --gradient-light: linear-gradient(180deg, hsl(220 14% 97%) 0%, hsl(0 0% 100%) 100%);
+    --gradient-hero: radial-gradient(ellipse at 50% 0%, hsl(218 66% 36% / 0.08) 0%, transparent 60%);
+    --gradient-card: linear-gradient(135deg, hsl(0 0% 100% / 0.95) 0%, hsl(220 20% 95% / 0.9) 100%);
+    --gradient-platinum: linear-gradient(180deg, hsl(0 0% 100%) 0%, hsl(220 20% 95%) 100%);
     
-    --glass-bg: hsl(0 0% 100% / 0.7);
-    --glass-border: hsl(220 20% 90% / 0.8);
+    --glow-primary: 0 0 60px hsl(218 66% 36% / 0.15);
+    --glow-accent: 0 0 60px hsl(181 68% 50% / 0.15);
+    --glow-card: 0 8px 32px hsl(222 17% 12% / 0.04);
+    --glow-gold: 0 0 40px hsl(42 52% 54% / 0.2);
+    
+    --glass-bg: hsl(0 0% 100% / 0.8);
+    --glass-border: hsl(220 20% 90% / 0.6);
     --glass-blur: blur(20px);
 
+    --shadow-soft: 0 4px 20px hsl(222 17% 12% / 0.04);
+    --shadow-medium: 0 8px 30px hsl(222 17% 12% / 0.06);
+    --shadow-elegant: 0 12px 40px hsl(222 17% 12% / 0.08);
+
     --sidebar-background: 0 0% 100%;
-    --sidebar-foreground: 228 24% 12%;
-    --sidebar-primary: 192 100% 50%;
-    --sidebar-primary-foreground: 228 24% 12%;
-    --sidebar-accent: 220 14% 96%;
-    --sidebar-accent-foreground: 228 24% 12%;
+    --sidebar-foreground: 222 17% 12%;
+    --sidebar-primary: 218 66% 36%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 220 20% 95%;
+    --sidebar-accent-foreground: 222 17% 12%;
     --sidebar-border: 220 20% 90%;
-    --sidebar-ring: 192 100% 50%;
+    --sidebar-ring: 218 66% 36%;
   }
 }
 
@@ -87,11 +95,26 @@
     backdrop-filter: var(--glass-blur);
     -webkit-backdrop-filter: var(--glass-blur);
     border: 1px solid var(--glass-border);
-    box-shadow: var(--glow-card);
+    box-shadow: var(--shadow-soft);
+  }
+
+  .glass-card-elevated {
+    background: var(--glass-bg);
+    backdrop-filter: var(--glass-blur);
+    -webkit-backdrop-filter: var(--glass-blur);
+    border: 1px solid var(--glass-border);
+    box-shadow: var(--shadow-medium);
   }
 
   .gradient-text {
     background: var(--gradient-primary);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .gradient-text-gold {
+    background: linear-gradient(135deg, hsl(var(--gold)) 0%, hsl(42 60% 65%) 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -105,17 +128,34 @@
     box-shadow: var(--glow-accent);
   }
 
+  .glow-gold {
+    box-shadow: var(--glow-gold);
+  }
+
   .hero-gradient {
     background: var(--gradient-hero);
   }
 
+  .platinum-section {
+    background: var(--gradient-platinum);
+  }
+
+  .elegant-border {
+    border: 1px solid hsl(220 20% 88%);
+  }
+
+  .gold-divider {
+    height: 2px;
+    background: linear-gradient(90deg, transparent, hsl(var(--gold) / 0.5), transparent);
+  }
+
   .nav-link {
-    @apply relative text-muted-foreground hover:text-foreground transition-colors duration-300;
+    @apply relative text-muted-foreground hover:text-primary transition-all duration-500;
   }
 
   .nav-link::after {
     content: '';
-    @apply absolute bottom-0 left-0 w-0 h-0.5 bg-primary transition-all duration-300;
+    @apply absolute bottom-0 left-0 w-0 h-0.5 bg-primary transition-all duration-500;
   }
 
   .nav-link:hover::after,
@@ -132,11 +172,29 @@
   }
 
   .card-hover {
-    @apply transition-all duration-500 hover:scale-[1.02] hover:shadow-2xl;
+    @apply transition-all duration-700 ease-out hover:scale-[1.02];
+    box-shadow: var(--shadow-soft);
+  }
+
+  .card-hover:hover {
+    box-shadow: var(--shadow-elegant);
   }
 
   .section-container {
     @apply py-16 lg:py-24 bg-card;
+  }
+
+  .luxury-card {
+    background: linear-gradient(135deg, hsl(0 0% 100%) 0%, hsl(220 20% 98%) 100%);
+    border: 1px solid hsl(220 20% 92%);
+    box-shadow: var(--shadow-soft);
+    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .luxury-card:hover {
+    border-color: hsl(var(--primary) / 0.3);
+    box-shadow: var(--shadow-elegant);
+    transform: translateY(-4px);
   }
 }
 

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Header from "@/components/Header";
 import TabNavigation from "@/components/TabNavigation";
@@ -17,9 +17,24 @@ type Section = "home" | "about" | "events" | "sponsors" | "gallery" | "team" | "
 
 const Index = () => {
   const [activeSection, setActiveSection] = useState<Section>("home");
+  const departmentRef = useRef<HTMLElement>(null);
+  const contentRef = useRef<HTMLDivElement>(null);
 
   const handleSectionChange = (section: Section) => {
     setActiveSection(section);
+    
+    // Scroll to department section for "about" or content section for others
+    if (section === "about") {
+      setTimeout(() => {
+        departmentRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+      }, 100);
+    } else if (section !== "home") {
+      setTimeout(() => {
+        contentRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+      }, 100);
+    } else {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
   };
 
   const renderSectionContent = () => {
@@ -59,22 +74,24 @@ const Index = () => {
       <SplitHeroSection />
 
       {/* Department Info - Always Visible */}
-      <DepartmentInfo />
+      <DepartmentInfo ref={departmentRef} />
 
       {/* Dynamic Section Content */}
-      <AnimatePresence mode="wait">
-        {activeSection !== "home" && (
-          <motion.div
-            key={activeSection}
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
-            transition={{ duration: 0.4, ease: "easeInOut" }}
-          >
-            {renderSectionContent()}
-          </motion.div>
-        )}
-      </AnimatePresence>
+      <div ref={contentRef}>
+        <AnimatePresence mode="wait">
+          {activeSection !== "home" && (
+            <motion.div
+              key={activeSection}
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -20 }}
+              transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+            >
+              {renderSectionContent()}
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </div>
 
       <Footer onSectionChange={(section) => handleSectionChange(section as Section)} />
     </div>
