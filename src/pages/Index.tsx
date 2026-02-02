@@ -1,7 +1,10 @@
 import { useState } from "react";
-import { AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import Header from "@/components/Header";
-import Hero from "@/components/Hero";
+import TabNavigation from "@/components/TabNavigation";
+import NotificationBar from "@/components/NotificationBar";
+import SplitHeroSection from "@/components/SplitHeroSection";
+import DepartmentInfo from "@/components/DepartmentInfo";
 import About from "@/components/About";
 import Events from "@/components/Events";
 import Gallery from "@/components/Gallery";
@@ -17,11 +20,9 @@ const Index = () => {
 
   const handleSectionChange = (section: Section) => {
     setActiveSection(section);
-    // Scroll to top of content area when section changes
-    window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
-  const renderSection = () => {
+  const renderSectionContent = () => {
     switch (activeSection) {
       case "about":
         return <About key="about" />;
@@ -43,13 +44,38 @@ const Index = () => {
 
   return (
     <div className="min-h-screen bg-background text-foreground overflow-x-hidden">
-      <Header activeSection={activeSection} onSectionChange={handleSectionChange} />
-      <main>
-        <Hero />
-        <AnimatePresence mode="wait">
-          {activeSection !== "home" && renderSection()}
-        </AnimatePresence>
-      </main>
+      {/* Fixed Header */}
+      <Header />
+
+      {/* Tab Navigation - Below Header */}
+      <div className="pt-20">
+        <TabNavigation activeSection={activeSection} onSectionChange={handleSectionChange} />
+      </div>
+
+      {/* Notification Bar */}
+      <NotificationBar />
+
+      {/* Split Hero Section - Always Visible */}
+      <SplitHeroSection />
+
+      {/* Department Info - Always Visible */}
+      <DepartmentInfo />
+
+      {/* Dynamic Section Content */}
+      <AnimatePresence mode="wait">
+        {activeSection !== "home" && (
+          <motion.div
+            key={activeSection}
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+            transition={{ duration: 0.4, ease: "easeInOut" }}
+          >
+            {renderSectionContent()}
+          </motion.div>
+        )}
+      </AnimatePresence>
+
       <Footer onSectionChange={(section) => handleSectionChange(section as Section)} />
     </div>
   );

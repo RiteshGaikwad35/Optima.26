@@ -1,27 +1,8 @@
 import { useState, useEffect } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import { Menu, X } from "lucide-react";
+import { motion } from "framer-motion";
 
-type Section = "home" | "about" | "events" | "sponsors" | "gallery" | "team" | "archive";
-
-interface HeaderProps {
-  activeSection: Section;
-  onSectionChange: (section: Section) => void;
-}
-
-const navLinks: { name: string; section: Section }[] = [
-  { name: "Home", section: "home" },
-  { name: "About", section: "about" },
-  { name: "Events", section: "events" },
-  { name: "Sponsors", section: "sponsors" },
-  { name: "Gallery", section: "gallery" },
-  { name: "Team", section: "team" },
-  { name: "Archive", section: "archive" },
-];
-
-const Header = ({ activeSection, onSectionChange }: HeaderProps) => {
+const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -31,11 +12,6 @@ const Header = ({ activeSection, onSectionChange }: HeaderProps) => {
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
-
-  const handleNavClick = (section: Section) => {
-    setIsMobileMenuOpen(false);
-    onSectionChange(section);
-  };
 
   return (
     <motion.header
@@ -69,89 +45,29 @@ const Header = ({ activeSection, onSectionChange }: HeaderProps) => {
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.3 }}
-            className="hidden lg:flex flex-col items-center"
+            className="flex flex-col items-center"
           >
-            <h1 className="text-2xl font-display font-bold gradient-text tracking-wider">
+            <h1 className="text-xl md:text-2xl font-display font-bold gradient-text tracking-wider">
               OPTIMA
             </h1>
-            <p className="text-xs text-muted-foreground">
+            <p className="text-[10px] md:text-xs text-muted-foreground hidden sm:block">
               Department of Computer Applications | NIT Trichy
             </p>
           </motion.div>
 
-          {/* Desktop Navigation */}
-          <nav className="hidden lg:flex items-center gap-6">
-            {navLinks.map((link, index) => (
-              <motion.button
-                key={link.name}
-                initial={{ opacity: 0, y: -20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.4 + index * 0.05 }}
-                onClick={() => handleNavClick(link.section)}
-                className={`nav-link text-sm font-medium ${
-                  activeSection === link.section ? "active text-primary" : ""
-                }`}
-              >
-                {link.name}
-              </motion.button>
-            ))}
-          </nav>
-
-          {/* Right Logo - OPTIMA (Desktop) */}
+          {/* Right Logo - OPTIMA */}
           <motion.div
             initial={{ opacity: 0, x: 20 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ delay: 0.2 }}
-            className="hidden lg:block flex-shrink-0"
+            className="flex-shrink-0"
           >
-            <div className="w-12 h-12 rounded-full bg-gradient-to-br from-primary to-accent flex items-center justify-center shadow-lg">
-              <span className="text-lg font-display font-bold text-card">O</span>
+            <div className="w-10 h-10 md:w-12 md:h-12 rounded-full bg-gradient-to-br from-primary to-accent flex items-center justify-center shadow-lg">
+              <span className="text-base md:text-lg font-display font-bold text-primary-foreground">O</span>
             </div>
           </motion.div>
-
-          {/* Mobile Menu Button */}
-          <motion.button
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            className="lg:hidden p-2 text-foreground"
-            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-          >
-            {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
-          </motion.button>
         </div>
       </div>
-
-      {/* Mobile Menu */}
-      <AnimatePresence>
-        {isMobileMenuOpen && (
-          <motion.div
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: "auto" }}
-            exit={{ opacity: 0, height: 0 }}
-            transition={{ duration: 0.3 }}
-            className="lg:hidden glass-card border-t border-border"
-          >
-            <nav className="container mx-auto px-4 py-6 flex flex-col gap-4">
-              {navLinks.map((link, index) => (
-                <motion.button
-                  key={link.name}
-                  initial={{ opacity: 0, x: -20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: index * 0.05 }}
-                  onClick={() => handleNavClick(link.section)}
-                  className={`text-left py-2 text-lg font-medium transition-colors ${
-                    activeSection === link.section
-                      ? "text-primary"
-                      : "text-muted-foreground hover:text-foreground"
-                  }`}
-                >
-                  {link.name}
-                </motion.button>
-              ))}
-            </nav>
-          </motion.div>
-        )}
-      </AnimatePresence>
     </motion.header>
   );
 };
