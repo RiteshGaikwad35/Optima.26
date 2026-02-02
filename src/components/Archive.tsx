@@ -60,10 +60,16 @@ const archives = [
 const Archive = () => {
   const [selectedArchive, setSelectedArchive] = useState<typeof archives[0] | null>(null);
   const containerRef = useRef(null);
-  const isInView = useInView(containerRef, { once: true, margin: "-100px" });
+  const isInView = useInView(containerRef, { once: true, margin: "-50px" });
 
   return (
-    <section id="archive" className="py-24 lg:py-32 relative overflow-hidden bg-gradient-to-b from-background via-secondary/20 to-background">
+    <motion.section
+      initial={{ opacity: 0, y: 30 }}
+      animate={{ opacity: 1, y: 0 }}
+      exit={{ opacity: 0, y: -30 }}
+      transition={{ duration: 0.5 }}
+      className="section-container relative overflow-hidden"
+    >
       {/* Background Pattern */}
       <div className="absolute inset-0 opacity-5">
         <div className="absolute inset-0" style={{
@@ -108,7 +114,7 @@ const Archive = () => {
                   alt={`OPTIMA ${archive.year}`}
                   className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-background via-background/50 to-transparent" />
+                <div className="absolute inset-0 bg-gradient-to-t from-card via-card/50 to-transparent" />
                 <div className="absolute bottom-4 left-4">
                   <span className="text-4xl font-display font-bold gradient-text">{archive.year}</span>
                 </div>
@@ -145,7 +151,7 @@ const Archive = () => {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              className="fixed inset-0 z-50 flex items-center justify-center bg-background/95 backdrop-blur-xl p-4"
+              className="fixed inset-0 z-50 flex items-center justify-center bg-foreground/80 backdrop-blur-xl p-4"
               onClick={() => setSelectedArchive(null)}
             >
               <motion.div
@@ -153,7 +159,7 @@ const Archive = () => {
                 animate={{ opacity: 1, scale: 1, y: 0 }}
                 exit={{ opacity: 0, scale: 0.9, y: 20 }}
                 transition={{ duration: 0.3 }}
-                className="glass-card rounded-2xl max-w-3xl w-full max-h-[90vh] overflow-y-auto"
+                className="bg-card rounded-2xl max-w-3xl w-full max-h-[90vh] overflow-y-auto shadow-2xl"
                 onClick={(e) => e.stopPropagation()}
               >
                 {/* Header Image */}
@@ -166,9 +172,9 @@ const Archive = () => {
                   <div className="absolute inset-0 bg-gradient-to-t from-card to-transparent" />
                   <button
                     onClick={() => setSelectedArchive(null)}
-                    className="absolute top-4 right-4 p-2 rounded-full glass-card hover:bg-white/10 transition-colors"
+                    className="absolute top-4 right-4 p-2 rounded-full bg-card/80 hover:bg-card transition-colors"
                   >
-                    <X className="w-5 h-5" />
+                    <X className="w-5 h-5 text-foreground" />
                   </button>
                   <div className="absolute bottom-6 left-6">
                     <span className="text-5xl font-display font-bold gradient-text">{selectedArchive.year}</span>
@@ -230,7 +236,7 @@ const Archive = () => {
           )}
         </AnimatePresence>
       </div>
-    </section>
+    </motion.section>
   );
 };
 

@@ -3,28 +3,34 @@ import { motion, useInView } from "framer-motion";
 
 const sponsors = {
   platinum: [
-    { name: "TechCorp", logo: "https://placehold.co/200x80/1a1a2e/38bdf8?text=TechCorp&font=montserrat" },
-    { name: "InnovateTech", logo: "https://placehold.co/200x80/1a1a2e/38bdf8?text=InnovateTech&font=montserrat" },
+    { name: "TechCorp", logo: "https://placehold.co/200x80/f7f9fc/00cfff?text=TechCorp&font=montserrat" },
+    { name: "InnovateTech", logo: "https://placehold.co/200x80/f7f9fc/00cfff?text=InnovateTech&font=montserrat" },
   ],
   gold: [
-    { name: "DataFlow", logo: "https://placehold.co/180x70/1a1a2e/a78bfa?text=DataFlow&font=montserrat" },
-    { name: "CloudBase", logo: "https://placehold.co/180x70/1a1a2e/a78bfa?text=CloudBase&font=montserrat" },
-    { name: "AILabs", logo: "https://placehold.co/180x70/1a1a2e/a78bfa?text=AILabs&font=montserrat" },
+    { name: "DataFlow", logo: "https://placehold.co/180x70/f7f9fc/6c63ff?text=DataFlow&font=montserrat" },
+    { name: "CloudBase", logo: "https://placehold.co/180x70/f7f9fc/6c63ff?text=CloudBase&font=montserrat" },
+    { name: "AILabs", logo: "https://placehold.co/180x70/f7f9fc/6c63ff?text=AILabs&font=montserrat" },
   ],
   silver: [
-    { name: "CodeStack", logo: "https://placehold.co/150x60/1a1a2e/94a3b8?text=CodeStack&font=montserrat" },
-    { name: "DevTools", logo: "https://placehold.co/150x60/1a1a2e/94a3b8?text=DevTools&font=montserrat" },
-    { name: "ByteForge", logo: "https://placehold.co/150x60/1a1a2e/94a3b8?text=ByteForge&font=montserrat" },
-    { name: "NetWorks", logo: "https://placehold.co/150x60/1a1a2e/94a3b8?text=NetWorks&font=montserrat" },
+    { name: "CodeStack", logo: "https://placehold.co/150x60/f7f9fc/5f6b85?text=CodeStack&font=montserrat" },
+    { name: "DevTools", logo: "https://placehold.co/150x60/f7f9fc/5f6b85?text=DevTools&font=montserrat" },
+    { name: "ByteForge", logo: "https://placehold.co/150x60/f7f9fc/5f6b85?text=ByteForge&font=montserrat" },
+    { name: "NetWorks", logo: "https://placehold.co/150x60/f7f9fc/5f6b85?text=NetWorks&font=montserrat" },
   ],
 };
 
 const Sponsors = () => {
   const containerRef = useRef(null);
-  const isInView = useInView(containerRef, { once: true, margin: "-100px" });
+  const isInView = useInView(containerRef, { once: true, margin: "-50px" });
 
   return (
-    <section className="py-24 lg:py-32 relative overflow-hidden bg-gradient-to-b from-background via-secondary/10 to-background">
+    <motion.section
+      initial={{ opacity: 0, y: 30 }}
+      animate={{ opacity: 1, y: 0 }}
+      exit={{ opacity: 0, y: -30 }}
+      transition={{ duration: 0.5 }}
+      className="section-container relative overflow-hidden"
+    >
       <div ref={containerRef} className="container mx-auto px-4 relative z-10">
         {/* Section Header */}
         <motion.div
@@ -65,7 +71,7 @@ const Sponsors = () => {
                 <img
                   src={sponsor.logo}
                   alt={sponsor.name}
-                  className="h-16 md:h-20 object-contain opacity-80 group-hover:opacity-100 transition-opacity"
+                  className="h-16 md:h-20 object-contain group-hover:scale-105 transition-transform"
                 />
               </motion.div>
             ))}
@@ -94,7 +100,7 @@ const Sponsors = () => {
                 <img
                   src={sponsor.logo}
                   alt={sponsor.name}
-                  className="h-12 md:h-14 object-contain opacity-70 group-hover:opacity-100 transition-opacity"
+                  className="h-12 md:h-14 object-contain group-hover:scale-105 transition-transform"
                 />
               </motion.div>
             ))}
@@ -122,7 +128,7 @@ const Sponsors = () => {
                 <img
                   src={sponsor.logo}
                   alt={sponsor.name}
-                  className="h-10 md:h-12 object-contain opacity-60 group-hover:opacity-100 transition-opacity"
+                  className="h-10 md:h-12 object-contain group-hover:scale-105 transition-transform"
                 />
               </motion.div>
             ))}
@@ -137,12 +143,12 @@ const Sponsors = () => {
           className="text-center mt-16"
         >
           <p className="text-muted-foreground mb-4">Interested in partnering with OPTIMA?</p>
-          <button className="px-6 py-3 rounded-full glass-card text-foreground font-medium transition-all duration-300 hover:bg-white/10 border border-white/10">
+          <button className="px-6 py-3 rounded-full glass-card text-foreground font-medium transition-all duration-300 hover:bg-muted border border-border">
             Become a Sponsor
           </button>
         </motion.div>
       </div>
-    </section>
+    </motion.section>
   );
 };
 

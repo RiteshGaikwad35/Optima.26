@@ -56,7 +56,7 @@ const galleryImages = [
 const Gallery = () => {
   const [selectedImage, setSelectedImage] = useState<number | null>(null);
   const containerRef = useRef(null);
-  const isInView = useInView(containerRef, { once: true, margin: "-100px" });
+  const isInView = useInView(containerRef, { once: true, margin: "-50px" });
 
   const openLightbox = (index: number) => setSelectedImage(index);
   const closeLightbox = () => setSelectedImage(null);
@@ -80,10 +80,16 @@ const Gallery = () => {
   };
 
   return (
-    <section id="gallery" className="py-24 lg:py-32 relative overflow-hidden">
+    <motion.section
+      initial={{ opacity: 0, y: 30 }}
+      animate={{ opacity: 1, y: 0 }}
+      exit={{ opacity: 0, y: -30 }}
+      transition={{ duration: 0.5 }}
+      className="section-container relative overflow-hidden"
+    >
       {/* Background Elements */}
-      <div className="absolute top-1/4 right-0 w-96 h-96 bg-accent/10 rounded-full blur-3xl" />
-      <div className="absolute bottom-1/4 left-0 w-96 h-96 bg-primary/10 rounded-full blur-3xl" />
+      <div className="absolute top-1/4 right-0 w-96 h-96 bg-accent/5 rounded-full blur-3xl" />
+      <div className="absolute bottom-1/4 left-0 w-96 h-96 bg-primary/5 rounded-full blur-3xl" />
 
       <div ref={containerRef} className="container mx-auto px-4 relative z-10">
         {/* Section Header */}
@@ -111,7 +117,7 @@ const Gallery = () => {
               initial={{ opacity: 0, scale: 0.9 }}
               animate={isInView ? { opacity: 1, scale: 1 } : {}}
               transition={{ duration: 0.5, delay: index * 0.05 }}
-              className="relative aspect-[4/3] rounded-xl overflow-hidden cursor-pointer group"
+              className="relative aspect-[4/3] rounded-xl overflow-hidden cursor-pointer group shadow-lg"
               onClick={() => openLightbox(index)}
             >
               <img
@@ -121,13 +127,13 @@ const Gallery = () => {
                 loading="lazy"
               />
               {/* Overlay */}
-              <div className="absolute inset-0 bg-gradient-to-t from-background/90 via-background/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+              <div className="absolute inset-0 bg-gradient-to-t from-foreground/80 via-foreground/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                 <div className="absolute bottom-0 left-0 right-0 p-4">
-                  <p className="text-foreground font-medium text-sm">{image.title}</p>
+                  <p className="text-card font-medium text-sm">{image.title}</p>
                   <p className="text-primary text-xs">{image.year}</p>
                 </div>
                 <div className="absolute top-4 right-4">
-                  <ZoomIn className="w-5 h-5 text-foreground" />
+                  <ZoomIn className="w-5 h-5 text-card" />
                 </div>
               </div>
             </motion.div>
@@ -141,7 +147,7 @@ const Gallery = () => {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              className="fixed inset-0 z-50 flex items-center justify-center bg-background/95 backdrop-blur-xl"
+              className="fixed inset-0 z-50 flex items-center justify-center bg-foreground/95 backdrop-blur-xl"
               onClick={closeLightbox}
               onKeyDown={handleKeyDown}
               tabIndex={0}
@@ -149,23 +155,23 @@ const Gallery = () => {
               {/* Close Button */}
               <button
                 onClick={closeLightbox}
-                className="absolute top-6 right-6 p-2 rounded-full glass-card hover:bg-white/10 transition-colors z-10"
+                className="absolute top-6 right-6 p-2 rounded-full bg-card/20 hover:bg-card/30 transition-colors z-10"
               >
-                <X className="w-6 h-6" />
+                <X className="w-6 h-6 text-card" />
               </button>
 
               {/* Navigation */}
               <button
                 onClick={(e) => { e.stopPropagation(); prevImage(); }}
-                className="absolute left-4 md:left-8 p-3 rounded-full glass-card hover:bg-white/10 transition-colors z-10"
+                className="absolute left-4 md:left-8 p-3 rounded-full bg-card/20 hover:bg-card/30 transition-colors z-10"
               >
-                <ChevronLeft className="w-6 h-6" />
+                <ChevronLeft className="w-6 h-6 text-card" />
               </button>
               <button
                 onClick={(e) => { e.stopPropagation(); nextImage(); }}
-                className="absolute right-4 md:right-8 p-3 rounded-full glass-card hover:bg-white/10 transition-colors z-10"
+                className="absolute right-4 md:right-8 p-3 rounded-full bg-card/20 hover:bg-card/30 transition-colors z-10"
               >
-                <ChevronRight className="w-6 h-6" />
+                <ChevronRight className="w-6 h-6 text-card" />
               </button>
 
               {/* Image */}
@@ -183,8 +189,8 @@ const Gallery = () => {
                   alt={galleryImages[selectedImage].title}
                   className="w-full h-full object-contain rounded-xl"
                 />
-                <div className="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-background/90 to-transparent rounded-b-xl">
-                  <h3 className="text-xl font-display font-semibold text-foreground">
+                <div className="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-foreground/90 to-transparent rounded-b-xl">
+                  <h3 className="text-xl font-display font-semibold text-card">
                     {galleryImages[selectedImage].title}
                   </h3>
                   <p className="text-primary">{galleryImages[selectedImage].year}</p>
@@ -215,7 +221,7 @@ const Gallery = () => {
           )}
         </AnimatePresence>
       </div>
-    </section>
+    </motion.section>
   );
 };
 

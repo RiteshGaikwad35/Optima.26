@@ -1,7 +1,11 @@
 import { motion } from "framer-motion";
 import { Mail, MapPin, Phone, Instagram, Twitter, Linkedin, Youtube, ExternalLink } from "lucide-react";
 
-const Footer = () => {
+interface FooterProps {
+  onSectionChange?: (section: string) => void;
+}
+
+const Footer = ({ onSectionChange }: FooterProps) => {
   const currentYear = new Date().getFullYear();
 
   const socialLinks = [
@@ -12,18 +16,24 @@ const Footer = () => {
   ];
 
   const quickLinks = [
-    { name: "About", href: "#about" },
-    { name: "Events", href: "#events" },
-    { name: "Gallery", href: "#gallery" },
-    { name: "Archive", href: "#archive" },
-    { name: "Team", href: "#team" },
+    { name: "About", section: "about" },
+    { name: "Events", section: "events" },
+    { name: "Gallery", section: "gallery" },
+    { name: "Archive", section: "archive" },
+    { name: "Team", section: "team" },
   ];
 
+  const handleNavClick = (section: string) => {
+    if (onSectionChange) {
+      onSectionChange(section);
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+  };
+
   return (
-    <footer className="relative pt-24 pb-8 overflow-hidden">
+    <footer className="relative pt-24 pb-8 overflow-hidden bg-secondary/30">
       {/* Background Gradient */}
-      <div className="absolute inset-0 bg-gradient-to-t from-secondary/30 to-transparent" />
-      <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[600px] h-[300px] bg-primary/10 rounded-full blur-3xl" />
+      <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[600px] h-[300px] bg-primary/5 rounded-full blur-3xl" />
 
       <div className="container mx-auto px-4 relative z-10">
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
@@ -68,13 +78,13 @@ const Footer = () => {
             <ul className="space-y-3">
               {quickLinks.map((link) => (
                 <li key={link.name}>
-                  <a
-                    href={link.href}
+                  <button
+                    onClick={() => handleNavClick(link.section)}
                     className="text-muted-foreground hover:text-primary transition-colors duration-300 flex items-center gap-2 group"
                   >
                     <span className="w-0 h-px bg-primary group-hover:w-4 transition-all duration-300" />
                     {link.name}
-                  </a>
+                  </button>
                 </li>
               ))}
             </ul>
