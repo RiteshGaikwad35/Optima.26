@@ -103,13 +103,6 @@ const ImageSlider = () => {
           />
         ))}
       </div>
-
-      {/* Slide Counter */}
-      <div className="absolute top-3 sm:top-4 right-3 sm:right-4 px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-full bg-black/30 backdrop-blur-md z-10 border border-white/20">
-        <span className="text-white text-xs sm:text-sm font-medium">
-          {currentIndex + 1} / {images.length}
-        </span>
-      </div>
     </div>
   );
 };
