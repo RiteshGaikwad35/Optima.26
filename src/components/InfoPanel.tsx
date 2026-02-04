@@ -40,7 +40,7 @@ const InfoPanel = () => {
 
   return (
     <motion.div
-      className="h-full flex flex-col justify-center p-8 md:p-10"
+      className="h-full flex flex-col justify-center p-4 sm:p-6 md:p-8 lg:p-10"
       variants={containerVariants}
       initial="hidden"
       animate="visible"
@@ -64,7 +64,7 @@ const InfoPanel = () => {
       {/* Title with Premium Glow */}
       <motion.h1
         variants={itemVariants}
-        className="text-4xl md:text-5xl lg:text-7xl font-heading font-bold mb-4 tracking-tight"
+        className="text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-heading font-bold mb-3 sm:mb-4 tracking-tight"
       >
         <motion.span
           animate={glowAnimation}
@@ -78,7 +78,7 @@ const InfoPanel = () => {
         </motion.span>
         <motion.span
           variants={itemVariants}
-          className="block text-xl md:text-2xl lg:text-3xl font-medium mt-3"
+          className="block text-lg sm:text-xl md:text-2xl lg:text-3xl font-medium mt-2 sm:mt-3"
         >
           <span className="text-muted-foreground">Celebrating </span>
           <span className="relative inline-block">
@@ -97,7 +97,7 @@ const InfoPanel = () => {
       {/* First Paragraph with Highlighted Keywords */}
       <motion.p
         variants={itemVariants}
-        className="font-body text-muted-foreground text-base md:text-lg leading-relaxed max-w-3xl mb-6"
+        className="font-body text-muted-foreground text-sm sm:text-base md:text-lg leading-relaxed max-w-3xl mb-4 sm:mb-6"
       >
         OPTIMA is the official technical club of the{" "}
         <span className="text-foreground font-semibold">
@@ -115,17 +115,17 @@ const InfoPanel = () => {
       {/* Highlight Pills */}
       <motion.div
         variants={itemVariants}
-        className="flex flex-wrap gap-3 mb-6"
+        className="flex flex-wrap gap-2 sm:gap-3 mb-4 sm:mb-6"
       >
         {highlights.map((item, index) => (
           <motion.div
             key={index}
-            className="flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 border border-primary/20 backdrop-blur-sm"
+            className="flex items-center gap-1.5 sm:gap-2 px-3 sm:px-4 py-1.5 sm:py-2 rounded-full bg-primary/10 border border-primary/20 backdrop-blur-sm"
             whileHover={{ scale: 1.05, backgroundColor: "hsl(var(--primary) / 0.2)" }}
             transition={{ type: "spring", stiffness: 400 }}
           >
-            <item.icon className="w-4 h-4 text-primary" />
-            <span className="text-sm font-medium text-foreground">{item.label}</span>
+            <item.icon className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-primary" />
+            <span className="text-xs sm:text-sm font-medium text-foreground">{item.label}</span>
           </motion.div>
         ))}
       </motion.div>
@@ -133,7 +133,7 @@ const InfoPanel = () => {
       {/* Animated Divider */}
       <motion.div
         variants={itemVariants}
-        className="relative w-32 h-[2px] mb-6 overflow-hidden rounded-full"
+        className="relative w-24 sm:w-32 h-[2px] mb-4 sm:mb-6 overflow-hidden rounded-full"
       >
         <div className="absolute inset-0 bg-foreground/10" />
         <motion.div
@@ -147,7 +147,7 @@ const InfoPanel = () => {
       {/* Second Paragraph */}
       <motion.p
         variants={itemVariants}
-        className="font-body text-muted-foreground text-base md:text-lg leading-relaxed max-w-3xl"
+        className="font-body text-muted-foreground text-sm sm:text-base md:text-lg leading-relaxed max-w-3xl"
       >
         The club fosters{" "}
         <span className="text-foreground font-semibold">hands-on learning</span>,
