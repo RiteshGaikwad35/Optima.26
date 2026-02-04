@@ -1,29 +1,22 @@
 import { useState, useRef } from "react";
 import { motion, useInView, AnimatePresence } from "framer-motion";
-import { Calendar, Trophy, Users, X, ChevronRight, Star } from "lucide-react";
+import { X, ZoomIn } from "lucide-react";
 
-const archives = [
-  {
-
-    theme: "Optimizing Tomorrow",
-    image: "https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=600&h=400&fit=crop",
-  },
-  {
-    theme: "The Algorithm Revolution",
-    image: "https://images.unsplash.com/photo-1505373877841-8d25f7d46678?w=600&h=400&fit=crop",
-  },
-  {
-    theme: "Network Flows & Beyond",
-    image: "https://images.unsplash.com/photo-1591115765373-5207764f72e7?w=600&h=400&fit=crop",
-  },
-  {
-    theme: "Virtual Optimization",
-    image: "https://images.unsplash.com/photo-1523580494863-6f3031224c94?w=600&h=400&fit=crop",
-  },
+const archiveImages = [
+  { url: "/archive/optima-1.jpeg", alt: "OPTIMA 2024 - Team Photo" },
+  { url: "/archive/optima-2.jpg", alt: "OPTIMA 2024 - Award Ceremony" },
+  { url: "/archive/optima-3.jpeg", alt: "OPTIMA 2024 - Audience" },
+  { url: "/archive/optima-4.jpg", alt: "OPTIMA 2024 - Prize Distribution" },
+  { url: "/archive/optima-5.jpeg", alt: "OPTIMA - Stage Event" },
+  { url: "/archive/optima-6.jpg", alt: "OPTIMA 2024 - Guest Felicitation" },
+  { url: "/archive/optima-7.jpeg", alt: "OPTIMA - Group Photo" },
+  { url: "/archive/optima-8.jpg", alt: "OPTIMA 2024 - Winner" },
+  { url: "/archive/optima-9.jpeg", alt: "OPTIMA 2024 - Organizing Team" },
+  { url: "/archive/optima-10.jpg", alt: "OPTIMA 2024 - Ceremony" },
 ];
 
 const Archive = () => {
-  const [selectedArchive, setSelectedArchive] = useState<typeof archives[0] | null>(null);
+  const [selectedImage, setSelectedImage] = useState<typeof archiveImages[0] | null>(null);
   const containerRef = useRef(null);
   const isInView = useInView(containerRef, { once: true, margin: "-50px" });
 
@@ -43,127 +36,91 @@ const Archive = () => {
         }} />
       </div>
 
-      <div ref={containerRef} className="container mx-auto px-4 relative z-10">
+      <div ref={containerRef} className="container mx-auto px-4 sm:px-6 relative z-10">
         {/* Section Header */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6 }}
-          className="text-center mb-16"
+          className="text-center mb-8 sm:mb-12 md:mb-16"
         >
-          <h2 className="section-title">Gallery</h2>
+          <h2 className="section-title text-2xl sm:text-3xl md:text-4xl">
+            Gallery
+          </h2>
+          <p className="text-muted-foreground mt-2 text-sm sm:text-base">
+            Memories from past OPTIMA events
+          </p>
         </motion.div>
 
-        {/* Archive Cards */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-          {archives.map((archive, index) => (
+        {/* Masonry-style Gallery Grid */}
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-3 sm:gap-4">
+          {archiveImages.map((image, index) => (
             <motion.div
-              initial={{ opacity: 0, y: 40 }}
-              animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
-              onClick={() => setSelectedArchive(archive)}
-              className="glass-card rounded-2xl overflow-hidden cursor-pointer group card-hover"
+              key={index}
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={isInView ? { opacity: 1, scale: 1 } : {}}
+              transition={{ duration: 0.4, delay: index * 0.05 }}
+              onClick={() => setSelectedImage(image)}
+              className={`relative overflow-hidden rounded-xl cursor-pointer group ${
+                index % 5 === 0 ? 'row-span-2' : ''
+              }`}
             >
-              {/* Image */}
-              <div className="relative aspect-[4/3] overflow-hidden">
+              <div className={`relative ${index % 5 === 0 ? 'aspect-[3/4]' : 'aspect-square'} overflow-hidden`}>
                 <img
-                  src={archive.image}
-                  alt={`OPTIMA `}
+                  src={image.url}
+                  alt={image.alt}
                   className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                  loading="lazy"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-card via-card/50 to-transparent" />
-              </div>
-
-              {/* Content */}
-              <div className="p-6">
-                <h3 className="text-lg font-display font-semibold text-foreground mb-2 group-hover:text-primary transition-colors">
-                  {archive.theme}
-                </h3>
-                <div className="flex items-center gap-4 text-sm text-muted-foreground mb-4">
-                  
-                  
+                {/* Overlay */}
+                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                
+                {/* Zoom Icon */}
+                <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                  <div className="p-3 rounded-full bg-white/20 backdrop-blur-sm">
+                    <ZoomIn className="w-5 h-5 sm:w-6 sm:h-6 text-white" />
+                  </div>
                 </div>
-                <button className="flex items-center gap-1 text-primary text-sm font-medium group-hover:gap-2 transition-all">
-                  View Details
-                  <ChevronRight className="w-4 h-4" />
-                </button>
+
+                {/* Glow border on hover */}
+                <div className="absolute inset-0 rounded-xl border-2 border-transparent group-hover:border-primary/50 transition-colors duration-300" />
               </div>
             </motion.div>
           ))}
         </div>
 
-        {/* Archive Modal */}
+        {/* Lightbox Modal */}
         <AnimatePresence>
-          {selectedArchive && (
+          {selectedImage && (
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              className="fixed inset-0 z-50 flex items-center justify-center bg-foreground/80 backdrop-blur-xl p-4"
-              onClick={() => setSelectedArchive(null)}
+              className="fixed inset-0 z-50 flex items-center justify-center bg-black/90 backdrop-blur-xl p-4"
+              onClick={() => setSelectedImage(null)}
             >
               <motion.div
-                initial={{ opacity: 0, scale: 0.9, y: 20 }}
-                animate={{ opacity: 1, scale: 1, y: 0 }}
-                exit={{ opacity: 0, scale: 0.9, y: 20 }}
+                initial={{ opacity: 0, scale: 0.8 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 0.8 }}
                 transition={{ duration: 0.3 }}
-                className="bg-card rounded-2xl max-w-3xl w-full max-h-[90vh] overflow-y-auto shadow-2xl"
+                className="relative max-w-4xl w-full max-h-[85vh]"
                 onClick={(e) => e.stopPropagation()}
               >
-                {/* Header Image */}
-                <div className="relative aspect-video">
-                  <img
-                    src={selectedArchive.image}
-                    alt={`OPTIMA `}
-                    className="w-full h-full object-cover"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-card to-transparent" />
-                  <button
-                    onClick={() => setSelectedArchive(null)}
-                    className="absolute top-4 right-4 p-2 rounded-full bg-card/80 hover:bg-card transition-colors"
-                  >
-                    <X className="w-5 h-5 text-foreground" />
-                  </button>
-                  <div className="absolute bottom-6 left-6">
-                    <span className="text-5xl font-display font-bold gradient-text"></span>
-                    <h3 className="text-2xl font-display font-semibold text-foreground mt-2">
-                      {selectedArchive.theme}
-                    </h3>
-                  </div>
-                </div>
-
-                {/* Content */}
-                <div className="p-8">
-                  {/* Stats */}
-                  <div className="flex gap-8 mb-8">
-                    <div className="flex items-center gap-2">
-                      <Users className="w-5 h-5 text-primary" />
-                      <span className="font-semibold"></span>
-                      <span className="text-muted-foreground">Participants</span>
-                    </div>
-                    <div className="flex items-center gap-2">
-                      <Calendar className="w-5 h-5 text-primary" />
-                      <span className="font-semibold"></span>
-                      <span className="text-muted-foreground">Events</span>
-                    </div>
-                  </div>
-
-                  {/* Highlights */}
-                  <div className="mb-8">
-                    <h4 className="text-lg font-display font-semibold mb-4 flex items-center gap-2">
-                      <Star className="w-5 h-5 text-primary" />
-                      Key Highlights
-                    </h4>
-                  </div>
-
-                  {/* Winners */}
-                  <div>
-                    <h4 className="text-lg font-display font-semibold mb-4 flex items-center gap-2">
-                      <Trophy className="w-5 h-5 text-primary" />
-                      Notable Winners
-                    </h4>
-                  </div>
-                </div>
+                <img
+                  src={selectedImage.url}
+                  alt={selectedImage.alt}
+                  className="w-full h-full object-contain rounded-lg"
+                />
+                <button
+                  onClick={() => setSelectedImage(null)}
+                  className="absolute -top-12 right-0 sm:top-4 sm:right-4 p-2 rounded-full bg-white/10 hover:bg-white/20 transition-colors"
+                >
+                  <X className="w-6 h-6 text-white" />
+                </button>
+                <p className="absolute -bottom-10 left-0 right-0 text-center text-white/80 text-sm">
+                  {selectedImage.alt}
+                </p>
               </motion.div>
             </motion.div>
           )}

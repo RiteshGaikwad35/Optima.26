@@ -19,14 +19,14 @@ const tabs: { name: string; section: Section }[] = [
 
 const TabNavigation = ({ activeSection, onSectionChange }: TabNavigationProps) => {
   return (
-    <nav className="bg-card/95 backdrop-blur-lg border-b border-border/50 sticky top-[120px] md:top-[130px] z-40 shadow-sm mt-4">
-      <div className="container mx-auto px-4">
-        <div className="flex items-center justify-center gap-1 md:gap-3 overflow-x-auto scrollbar-hide py-3">
+    <nav className="bg-card/95 backdrop-blur-lg border-b border-border/50 sticky top-[100px] md:top-[110px] z-40 shadow-sm mt-6 md:mt-8">
+      <div className="container mx-auto px-2 sm:px-4">
+        <div className="flex items-center justify-start sm:justify-center gap-0.5 sm:gap-1 md:gap-3 overflow-x-auto scrollbar-hide py-2 sm:py-3 -mx-2 px-2">
           {tabs.map((tab) => (
             <button
               key={tab.section}
               onClick={() => onSectionChange(tab.section)}
-              className="relative px-5 md:px-7 py-3 text-sm md:text-base font-medium transition-all duration-500 whitespace-nowrap group"
+              className="relative px-3 sm:px-5 md:px-7 py-2 sm:py-3 text-xs sm:text-sm md:text-base font-medium transition-all duration-500 whitespace-nowrap group flex-shrink-0"
             >
               <span
                 className={`relative z-10 transition-all duration-500 ${
