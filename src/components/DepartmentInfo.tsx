@@ -121,7 +121,7 @@ const DepartmentInfo = forwardRef<HTMLElement>((_, ref) => {
                 </motion.div>
                 <div className="text-3xl md:text-4xl font-display font-bold mb-2">
                   <span className="bg-gradient-to-r from-primary via-accent to-primary bg-clip-text text-transparent">
-                    {stat.prefix && <span>{stat.prefix}</span>}
+                    
                     <AnimatedCounter 
                       end={stat.value} 
                       suffix={stat.suffix} 
