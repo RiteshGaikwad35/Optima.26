@@ -97,7 +97,7 @@ const Archive = () => {
         >
           <h2 className="section-title text-3xl md:text-4xl">Gallery</h2>
           <p className="text-muted-foreground mt-2">
-            Memories from OPTIMA 2023
+            Memories from OPTIMA 2025
           </p>
         </motion.div>
 

@@ -14,7 +14,7 @@ const curriculumAreas = [
 
 const stats = [
   { icon: Users, value: 20, suffix: "+", label: "Doctorate Faculty", isNumber: true },
-  { icon: GraduationCap, value: 5, prefix: "Top ", label: "MCA Programs", isNumber: true },
+  { icon: GraduationCap, value: 500, suffix: "+", label: "Students & Phd Scholars ", isNumber: true },
   { icon: Award, value: 30, suffix: "+", label: "Years Excellence", isNumber: true },
   { icon: BookOpen, value: 3, suffix: "", label: "Premier Courses", isNumber: true },
 ];
@@ -170,8 +170,9 @@ const DepartmentInfo = forwardRef<HTMLElement>((_, ref) => {
                 The Department of Computer Applications is a <span className="text-foreground font-semibold">pioneering department</span> within the institution, offering premier IT courses, including the <span className="text-primary font-medium">Master of Computer Applications (MCA)</span>, <span className="text-primary font-medium">Master of Science in Computer Science</span>, and <span className="text-primary font-medium">M.Tech in Data Analytics</span>.
               </p>
               <p className="text-muted-foreground leading-relaxed relative z-10">
-                Recognized among the <span className="text-foreground font-bold">top five MCA programs</span> in the country, committed to delivering <span className="text-foreground font-medium">high-quality education</span> that blends robust theoretical foundations with extensive practical training.
-              </p>
+  Recognized among the <span className="text-foreground font-bold">top five M.Tech (Data Analytics) and M.Sc. (Computer Science) programs</span> nationwide, the institution is committed to delivering <span className="text-foreground font-medium">high-quality education</span> that integrates strong theoretical foundations with extensive hands-on training.
+</p>
+
             </motion.div>
 
             <motion.div 

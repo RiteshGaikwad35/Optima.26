@@ -5,15 +5,15 @@ import { Bell, Calendar, Clock } from "lucide-react";
 const announcements = [
   {
     icon: Calendar,
-    text: "OPTIMA 2025 Registration Now Open! Early bird deadline: March 1st, 2025",
+    text: "OPTIMA 2026 Registration Now Open! Early bird deadline: Feb 21st, 2026",
   },
   {
     icon: Clock,
-    text: "Event Dates: March 15-17, 2025 | NIT Trichy Campus",
+    text: "Event Dates: FEB 21, 2026 | NIT Trichy Campus",
   },
   {
     icon: Bell,
-    text: "Prize Pool worth ₹2,00,000+ | Register now to participate in exciting competitions",
+    text: "Prize Pool worth ₹1,00,000+ | Register now to participate in exciting competitions",
   },
   {
     icon: Calendar,

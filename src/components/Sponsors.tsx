@@ -107,7 +107,7 @@ const Sponsors = () => {
           </h2>
           
           <p className="text-base sm:text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto mb-3 sm:mb-4 px-2">
-            Join us in making OPTIMA 2024 a grand success by becoming a sponsor!
+            Join us in making OPTIMA 2026 a grand success by becoming a sponsor!
           </p>
           <p className="text-base text-muted-foreground max-w-2xl mx-auto">
             We have various sponsorship tiers designed to suit you.
