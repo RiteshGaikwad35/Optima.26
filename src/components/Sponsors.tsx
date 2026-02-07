@@ -1,6 +1,6 @@
-import { useRef } from "react";
-import { motion, useInView } from "framer-motion";
-import { Crown, Star, Award, Medal, Gift, Users, Phone, ExternalLink, CheckCircle2, Gem } from "lucide-react";
+import { useRef, useState } from "react";
+import { motion, useInView, AnimatePresence } from "framer-motion";
+import { Crown, Star, Award, Gift, Users, Phone, ExternalLink, CheckCircle2, Gem, ChevronDown, Eye } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 
 const sponsorshipTiers = [
@@ -13,9 +13,11 @@ const sponsorshipTiers = [
     bgGradient: "from-violet-500/10 via-purple-500/5 to-indigo-600/10",
     borderColor: "border-violet-500/30",
     glowColor: "shadow-violet-500/20",
-    textColor: "text-violet-500",
+    textColor: "text-violet-400",
+    ringColor: "ring-violet-500/40",
     subtitle: "Premium Partnership Investment",
     impressions: "40,000+",
+    tagline: "Maximum visibility & brand dominance",
     sections: [
       {
         title: "Prime Branding Rights",
@@ -51,9 +53,11 @@ const sponsorshipTiers = [
     bgGradient: "from-yellow-500/10 via-amber-500/5 to-yellow-600/10",
     borderColor: "border-yellow-500/30",
     glowColor: "shadow-yellow-500/20",
-    textColor: "text-yellow-500",
+    textColor: "text-yellow-400",
+    ringColor: "ring-yellow-500/40",
     subtitle: "Strategic Partnership Investment",
     impressions: "20,000+",
+    tagline: "Strategic branding & prize association",
     sections: [
       {
         title: "Significant Branding",
@@ -82,9 +86,11 @@ const sponsorshipTiers = [
     bgGradient: "from-slate-400/10 via-gray-400/5 to-slate-500/10",
     borderColor: "border-slate-400/30",
     glowColor: "shadow-slate-400/20",
-    textColor: "text-slate-400",
+    textColor: "text-slate-300",
+    ringColor: "ring-slate-400/40",
     subtitle: "Growth Partnership Investment",
     impressions: "10,000+",
+    tagline: "Growing visibility & on-ground presence",
     sections: [
       {
         title: "Branding Benefits",
@@ -116,9 +122,11 @@ const sponsorshipTiers = [
     bgGradient: "from-orange-500/10 via-amber-600/5 to-orange-700/10",
     borderColor: "border-orange-500/30",
     glowColor: "shadow-orange-500/20",
-    textColor: "text-orange-500",
+    textColor: "text-orange-400",
+    ringColor: "ring-orange-500/40",
     subtitle: "Associate Partnership Investment",
     impressions: "",
+    tagline: "Digital acknowledgment & brand presence",
     sections: [
       {
         title: "Essential Branding",
@@ -155,6 +163,11 @@ const Sponsors = () => {
   const containerRef = useRef(null);
   const isInView = useInView(containerRef, { once: true, margin: "-50px" });
   const navigate = useNavigate();
+  const [expandedTier, setExpandedTier] = useState<string | null>(null);
+
+  const toggleTier = (tier: string) => {
+    setExpandedTier(expandedTier === tier ? null : tier);
+  };
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -181,7 +194,6 @@ const Sponsors = () => {
       transition={{ duration: 0.5 }}
       className="section-container relative overflow-hidden"
     >
-      {/* Premium Background Elements */}
       <div className="absolute top-0 left-1/4 w-96 h-96 bg-gradient-to-br from-yellow-500/10 to-amber-500/5 rounded-full blur-3xl" />
       <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-gradient-to-br from-primary/10 to-accent/5 rounded-full blur-3xl" />
 
@@ -214,74 +226,119 @@ const Sponsors = () => {
           </p>
         </motion.div>
 
-        {/* Tier Cards */}
+        {/* Tier Cards - Compact with reveal */}
         <motion.div
           variants={containerVariants}
           initial="hidden"
           animate={isInView ? "visible" : "hidden"}
-          className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8 mb-8 sm:mb-12"
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-5 mb-8 sm:mb-12"
         >
-          {sponsorshipTiers.map((tier) => (
-            <motion.div
-              key={tier.tier}
-              variants={itemVariants}
-              className="relative group"
-            >
-              <div className={`absolute inset-0 bg-gradient-to-br ${tier.bgGradient} rounded-3xl blur-xl opacity-50 group-hover:opacity-80 transition-opacity duration-500`} />
+          {sponsorshipTiers.map((tier) => {
+            const isExpanded = expandedTier === tier.tier;
+            const TierIcon = tier.icon;
+            const benefitCount = tier.sections.reduce((acc, s) => acc + s.items.length, 0);
 
-              <div className={`relative bg-card/95 backdrop-blur-xl rounded-2xl sm:rounded-3xl p-5 sm:p-6 md:p-8 border-2 ${tier.borderColor} shadow-xl ${tier.glowColor} group-hover:shadow-2xl transition-all duration-500 group-hover:scale-[1.01] group-hover:-translate-y-1 h-full`}>
-                {/* Tier Badge */}
-                <div className={`absolute -top-4 left-1/2 -translate-x-1/2 px-6 py-2 rounded-full bg-gradient-to-r ${tier.gradient} shadow-lg`}>
-                  <span className="text-white font-bold text-sm uppercase tracking-wider">
-                    {tier.tier} Sponsor {tier.emoji}
-                  </span>
-                </div>
+            return (
+              <motion.div
+                key={tier.tier}
+                variants={itemVariants}
+                layout
+                className="relative group"
+              >
+                <div className={`absolute inset-0 bg-gradient-to-br ${tier.bgGradient} rounded-2xl blur-xl opacity-40 group-hover:opacity-70 transition-opacity duration-500`} />
 
-                {/* Subtitle */}
-                <p className={`text-center text-sm mt-4 mb-2 ${tier.textColor} font-medium`}>
-                  {tier.subtitle}
-                </p>
-
-                {/* Amount */}
-                <div className="text-center mb-5">
-                  <span className={`text-3xl sm:text-4xl md:text-5xl font-display font-bold bg-gradient-to-r ${tier.gradient} bg-clip-text text-transparent`}>
-                    {tier.amount}
-                  </span>
-                </div>
-
-                {/* Decorative Line */}
-                <div className={`h-1 bg-gradient-to-r ${tier.gradient} rounded-full opacity-50 mb-5`} />
-
-                {/* Benefits Sections */}
-                <div className="space-y-4">
-                  {tier.sections.map((section, sIdx) => (
-                    <div key={sIdx}>
-                      <h4 className={`font-display font-bold text-sm uppercase tracking-wider ${tier.textColor} mb-2`}>
-                        {section.title}
-                      </h4>
-                      <ul className="space-y-1.5">
-                        {section.items.map((item, iIdx) => (
-                          <li key={iIdx} className="flex items-start gap-2 text-sm text-muted-foreground">
-                            <CheckCircle2 className={`w-4 h-4 mt-0.5 flex-shrink-0 ${tier.textColor}`} />
-                            <span>{item}</span>
-                          </li>
-                        ))}
-                      </ul>
+                <motion.div
+                  layout
+                  className={`relative bg-card/95 backdrop-blur-xl rounded-2xl border-2 ${tier.borderColor} shadow-xl ${tier.glowColor} group-hover:shadow-2xl transition-all duration-500 overflow-hidden cursor-pointer`}
+                  onClick={() => toggleTier(tier.tier)}
+                >
+                  {/* Compact Card Face */}
+                  <div className="p-5 sm:p-6 text-center">
+                    {/* Icon with glow */}
+                    <div className={`relative mx-auto w-16 h-16 sm:w-20 sm:h-20 rounded-2xl bg-gradient-to-br ${tier.gradient} flex items-center justify-center mb-4 shadow-lg group-hover:scale-110 transition-transform duration-500`}>
+                      <TierIcon className="w-8 h-8 sm:w-10 sm:h-10 text-white" />
+                      <div className={`absolute inset-0 rounded-2xl bg-gradient-to-br ${tier.gradient} opacity-0 group-hover:opacity-50 blur-lg transition-opacity duration-500`} />
                     </div>
-                  ))}
-                </div>
 
-                {/* Impressions */}
-                {tier.impressions && (
-                  <div className={`mt-5 pt-4 border-t ${tier.borderColor}`}>
-                    <p className={`text-center font-display font-bold text-sm ${tier.textColor}`}>
-                      Estimated Brand Impressions: {tier.impressions}
+                    {/* Tier name + emoji */}
+                    <h3 className="text-xl sm:text-2xl font-display font-bold text-foreground mb-1">
+                      {tier.tier} {tier.emoji}
+                    </h3>
+
+                    {/* Price */}
+                    <div className={`text-2xl sm:text-3xl font-display font-bold bg-gradient-to-r ${tier.gradient} bg-clip-text text-transparent mb-2`}>
+                      {tier.amount}
+                    </div>
+
+                    {/* Tagline */}
+                    <p className="text-xs sm:text-sm text-muted-foreground mb-4 line-clamp-2">
+                      {tier.tagline}
                     </p>
+
+                    {/* Impressions badge */}
+                    {tier.impressions && (
+                      <div className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full ${tier.borderColor} border bg-gradient-to-r ${tier.bgGradient} mb-4`}>
+                        <span className={`text-xs font-semibold ${tier.textColor}`}>
+                          {tier.impressions} impressions
+                        </span>
+                      </div>
+                    )}
+
+                    {/* Reveal button */}
+                    <div className={`flex items-center justify-center gap-2 py-2.5 px-4 rounded-xl ${isExpanded ? `bg-gradient-to-r ${tier.gradient} text-white` : `border ${tier.borderColor} ${tier.textColor}`} transition-all duration-300 text-sm font-semibold`}>
+                      <Eye className="w-4 h-4" />
+                      <span>{isExpanded ? 'Hide' : 'View'} {benefitCount} Benefits</span>
+                      <motion.div
+                        animate={{ rotate: isExpanded ? 180 : 0 }}
+                        transition={{ duration: 0.3 }}
+                      >
+                        <ChevronDown className="w-4 h-4" />
+                      </motion.div>
+                    </div>
                   </div>
-                )}
-              </div>
-            </motion.div>
-          ))}
+
+                  {/* Expandable Benefits */}
+                  <AnimatePresence>
+                    {isExpanded && (
+                      <motion.div
+                        initial={{ height: 0, opacity: 0 }}
+                        animate={{ height: "auto", opacity: 1 }}
+                        exit={{ height: 0, opacity: 0 }}
+                        transition={{ duration: 0.4, ease: "easeInOut" }}
+                        className="overflow-hidden"
+                      >
+                        <div className={`px-5 pb-5 border-t ${tier.borderColor}`}>
+                          <div className="pt-4 space-y-4">
+                            {tier.sections.map((section, sIdx) => (
+                              <div key={sIdx}>
+                                <h4 className={`font-display font-bold text-xs uppercase tracking-widest ${tier.textColor} mb-2`}>
+                                  {section.title}
+                                </h4>
+                                <ul className="space-y-1.5">
+                                  {section.items.map((item, iIdx) => (
+                                    <motion.li
+                                      key={iIdx}
+                                      initial={{ opacity: 0, x: -10 }}
+                                      animate={{ opacity: 1, x: 0 }}
+                                      transition={{ delay: sIdx * 0.1 + iIdx * 0.05 }}
+                                      className="flex items-start gap-2 text-xs sm:text-sm text-muted-foreground"
+                                    >
+                                      <CheckCircle2 className={`w-3.5 h-3.5 mt-0.5 flex-shrink-0 ${tier.textColor}`} />
+                                      <span>{item}</span>
+                                    </motion.li>
+                                  ))}
+                                </ul>
+                              </div>
+                            ))}
+                          </div>
+                        </div>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                </motion.div>
+              </motion.div>
+            );
+          })}
         </motion.div>
 
         {/* Additional Tiers */}
@@ -329,7 +386,6 @@ const Sponsors = () => {
             <p className="text-sm sm:text-base text-muted-foreground max-w-2xl mx-auto mb-6 px-2">
               Click below to view the payment QR code and register your sponsorship.
             </p>
-
             <button
               onClick={() => navigate("/register-sponsorship")}
               className="inline-flex items-center gap-2 px-5 sm:px-8 py-3 sm:py-4 rounded-full bg-gradient-to-r from-primary via-primary to-accent text-white text-sm sm:text-base font-semibold shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-300"
