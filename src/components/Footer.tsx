@@ -35,7 +35,7 @@ const Footer = ({ onSectionChange }: FooterProps) => {
             className="text-center"
           >
             <a
-              href="https://www.linkedin.com/in/ritesh-gaikwad-aborad/"
+              href="https://www.linkedin.com/in/ritesh-gaikwad-048642249/"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-1.5 text-xs text-muted-foreground hover:text-primary transition-colors"
