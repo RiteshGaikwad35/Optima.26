@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import { ExternalLink } from "lucide-react";
 
 interface FooterProps {
   onSectionChange?: (section: string) => void;
@@ -9,12 +10,10 @@ const Footer = ({ onSectionChange }: FooterProps) => {
 
   return (
     <footer className="relative pt-10 pb-4 overflow-hidden bg-secondary/30">
-      {/* Background Gradient */}
       <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[80px] h-[180px] bg-primary/5 rounded-full blur-3xl" />
 
       <div className="container mx-auto px-4">
-        <div className="grid grid-cols-1 gap-6 mb-6">
-          {/* Copyright */}
+        <div className="grid grid-cols-1 gap-4 mb-4">
           <motion.div
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
@@ -26,6 +25,23 @@ const Footer = ({ onSectionChange }: FooterProps) => {
               © {currentYear} OPTIMA — Department of Computer Applications, NIT Trichy.
               All rights reserved.
             </p>
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.4, delay: 0.3 }}
+            className="text-center"
+          >
+            <a
+              href="https://www.linkedin.com/in/ritesh-gaikwad-aborad/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-1.5 text-xs text-muted-foreground hover:text-primary transition-colors"
+            >
+              Built by Ritesh <ExternalLink className="w-3 h-3" />
+            </a>
           </motion.div>
         </div>
       </div>
