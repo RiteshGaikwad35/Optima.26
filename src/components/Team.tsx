@@ -8,42 +8,27 @@ import { Linkedin, Mail, Github } from "lucide-react";
 
 const facultyAdvisor = {
   name: "Dr. B. Janet",
+  role: "Faculty Advisor",
   subtitle: "Department of Computer Applications",
   image: "/team/janet.jpeg",
 };
 
 const teamMembers = [
-  {
-    name: "Arjun",
-    role: "Executive",
-    subtitle: "M.Sc Computer Science",
-    image: "/team/arjun.jpeg",
-    email: "arjunchaudhary682@gmail.com",
-    linkedin:"https://www.linkedin.com/in/arjun-chaudhary-482399185/"
-  },
+  
   {
     name: "Vibhor",
     role: "Core Member",
     subtitle: "M.Sc Computer Science",
     image: "/team/vibhor.jpeg",
-    linkedin:"https://www.linkedin.com/in/vibhor-thakur-5a298337a/",
-    email:"thakur4vibhor@gmail.com"
+    linkedin: "https://www.linkedin.com/in/vibhor-thakur-5a298337a/",
+    email: "thakur4vibhor@gmail.com",
   },
   {
-    name: "Shamas",
-    role: "Public Representative",
-    subtitle: "M.Sc Computer Science",
-    image: "/team/shamas.jpeg",
-    linkedin: "https://www.linkedin.com/in/shammas-ca-973a48317/",
-    email:"shammasca16@gmail.com",
-    github:"https://github.com/shammasca313grabs-dot",
-  },
-  {
-    name: "Shuvrajyoti",
+    name: "Shuvrajyoti Nath Mohajohn",
     role: "Core Member",
     subtitle: "M.Sc Computer Science",
     image: "/team/shbhu.jpeg",
-    linkedin:"https://www.linkedin.com/in/shuvrajyotin/",
+    linkedin: "https://www.linkedin.com/in/shuvrajyotin/",
     github: "https://github.com/wolfang666",
   },
   {
@@ -52,7 +37,24 @@ const teamMembers = [
     subtitle: "M.Tech Data Analytics",
     image: "/team/akrit.jpeg",
     linkedin: "https://www.linkedin.com/in/akriti-jaiswal-760834232/",
-    email:"akritijofficial@gmail.com",
+    email: "akritijofficial@gmail.com",
+  },
+  {
+    name: "Arjun",
+    role: "Executive",
+    subtitle: "M.Sc Computer Science",
+    image: "/team/arjun.jpeg",
+    email: "arjunchaudhary682@gmail.com",
+    linkedin: "https://www.linkedin.com/in/arjun-chaudhary-482399185/",
+  },
+  {
+    name: "Shamas",
+    role: "Public Representative",
+    subtitle: "M.Sc Computer Science",
+    image: "/team/shamas.jpeg",
+    linkedin: "https://www.linkedin.com/in/shammas-ca-973a48317/",
+    email: "shammasca16@gmail.com",
+    github: "https://github.com/shammasca313grabs-dot",
   },
 ];
 
@@ -63,6 +65,7 @@ const teamMembers = [
 const TeamCard = ({ member }) => {
   return (
     <div className="glass-card rounded-2xl p-6 text-center group card-hover">
+      
       {/* Avatar */}
       <div className="relative w-32 h-32 mx-auto mb-6">
         <div className="absolute inset-0 rounded-full bg-gradient-to-br from-primary to-accent opacity-0 group-hover:opacity-100 blur-xl transition-opacity" />
@@ -90,30 +93,49 @@ const TeamCard = ({ member }) => {
         </p>
       )}
 
-      {/* Social Icons (optional) */}
+      {/* Social Icons */}
       <div className="flex justify-center gap-3">
+        
         {member.linkedin && (
-          <a href={member.linkedin} className="p-2 rounded-full glass-card hover:text-primary">
+          <a
+            href={member.linkedin}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="p-2 rounded-full glass-card hover:text-primary transition"
+          >
             <Linkedin className="w-4 h-4" />
           </a>
         )}
+
         {member.email && (
-          <a href={member.email} className="p-2 rounded-full glass-card hover:text-primary">
+          <a
+            href={`mailto:${member.email}`}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="p-2 rounded-full glass-card hover:text-primary transition"
+          >
             <Mail className="w-4 h-4" />
           </a>
         )}
+
         {member.github && (
-          <a href={member.github} className="p-2 rounded-full glass-card hover:text-primary">
+          <a
+            href={member.github}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="p-2 rounded-full glass-card hover:text-primary transition"
+          >
             <Github className="w-4 h-4" />
           </a>
         )}
+
       </div>
     </div>
   );
 };
 
 /* ----------------------------------------
-   FACULTY ADVISOR CARD (GRAY THEME)
+   FACULTY ADVISOR CARD
 ---------------------------------------- */
 
 const FacultyAdvisorCard = ({ member }) => {
@@ -124,10 +146,10 @@ const FacultyAdvisorCard = ({ member }) => {
       transition={{ duration: 0.6 }}
       className="relative max-w-md w-full"
     >
-      {/* Soft Gray Glow */}
       <div className="absolute -inset-4 bg-gradient-to-r from-gray-400/20 via-gray-500/20 to-gray-600/20 blur-3xl rounded-3xl" />
 
       <div className="relative glass-card rounded-3xl p-8 text-center border border-gray-500/30">
+
         {/* Badge */}
         <span className="absolute -top-4 left-1/2 -translate-x-1/2 px-4 py-1 text-xs font-semibold tracking-wide rounded-full 
         bg-gradient-to-r from-gray-400 to-gray-600 text-white shadow-lg">
@@ -153,25 +175,37 @@ const FacultyAdvisorCard = ({ member }) => {
           {member.role}
         </p>
 
-        {/* Subtitle */}
         {member.subtitle && (
           <p className="text-base text-muted-foreground mt-1 mb-4">
             {member.subtitle}
           </p>
         )}
 
-        {/* Social Icons (optional) */}
+        {/* Social Icons */}
         <div className="flex justify-center gap-4">
+
           {member.linkedin && (
-            <a href={member.linkedin} className="p-2 rounded-full glass-card hover:text-gray-300">
+            <a
+              href={member.linkedin}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="p-2 rounded-full glass-card hover:text-gray-300 transition"
+            >
               <Linkedin className="w-5 h-5" />
             </a>
           )}
+
           {member.email && (
-            <a href={member.email} className="p-2 rounded-full glass-card hover:text-gray-300">
+            <a
+              href={`mailto:${member.email}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="p-2 rounded-full glass-card hover:text-gray-300 transition"
+            >
               <Mail className="w-5 h-5" />
             </a>
           )}
+
         </div>
       </div>
     </motion.div>
@@ -209,6 +243,7 @@ const Team = () => {
             <TeamCard key={member.name} member={member} />
           ))}
         </div>
+
       </div>
     </motion.section>
   );

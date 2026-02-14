@@ -26,6 +26,31 @@ const Footer = ({ onSectionChange }: FooterProps) => {
               All rights reserved.
             </p>
           </motion.div>
+          <motion.div
+  initial={{ opacity: 0, y: 10 }}
+  whileInView={{ opacity: 1, y: 0 }}
+  viewport={{ once: true }}
+  transition={{ duration: 0.5, delay: 0.3 }}
+  className="text-center"
+>
+  <a
+    href="https://www.linkedin.com/in/ritesh-gaikwad-048642249/"
+    target="_blank"
+    rel="noopener noreferrer"
+    className="
+      inline-flex items-center gap-1.5
+      text-sm md:text-base
+      font-medium
+      text-muted-foreground
+      hover:text-primary
+      transition-colors duration-300
+      tracking-wide
+    "
+  >
+    Built by Ritesh
+    <ExternalLink className="w-4 h-4 opacity-70 group-hover:opacity-100 transition-opacity" />
+  </a>
+</motion.div>
 
          
 
