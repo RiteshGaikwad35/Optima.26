@@ -1,9 +1,10 @@
 import { useState } from "react";
 import { useSearchParams, useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
-import { ArrowLeft, Send, CheckCircle } from "lucide-react";
+import { ArrowLeft, Send, CheckCircle, Loader2 } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { useToast } from "@/hooks/use-toast";
+import { supabase } from "@/integrations/supabase/client";
 
 const eventNames: Record<string, string> = {
   neuralquest: "NeuralQuest 2026 – ML Hackathon",
@@ -24,6 +25,7 @@ const RegisterEvent = () => {
   const eventName = eventNames[eventId] || "Event";
 
   const [submitted, setSubmitted] = useState(false);
+  const [loading, setLoading] = useState(false);
   const [form, setForm] = useState({
     name: "",
     mobile: "",
@@ -37,16 +39,32 @@ const RegisterEvent = () => {
     setForm((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!form.name || !form.mobile || !form.email || !form.branch) {
       toast({ title: "Please fill all required fields", variant: "destructive" });
       return;
     }
-    // In production this would go to a backend
-    console.log("Registration:", { ...form, event: eventId });
-    setSubmitted(true);
-    toast({ title: "Registration submitted successfully!" });
+    setLoading(true);
+    try {
+      const { error } = await supabase.from("registrations").insert({
+        registration_type: "event",
+        full_name: form.name,
+        whatsapp_number: form.mobile,
+        email_id: form.email,
+        college_name: form.college || form.branch,
+        district: form.branch,
+        education: form.year ? `Year ${form.year}` : null,
+        selected_competitions: eventId ? [eventId] : [],
+      });
+      if (error) throw error;
+      setSubmitted(true);
+      toast({ title: "Registration submitted successfully!" });
+    } catch (err: any) {
+      toast({ title: "Registration failed", description: err.message, variant: "destructive" });
+    } finally {
+      setLoading(false);
+    }
   };
 
   if (submitted) {
@@ -130,9 +148,11 @@ const RegisterEvent = () => {
 
             <button
               type="submit"
-              className="w-full py-3 rounded-xl bg-gradient-to-r from-primary to-accent text-card font-semibold text-base hover:scale-[1.02] hover:shadow-lg hover:shadow-primary/20 transition-all flex items-center justify-center gap-2 mt-4"
+              disabled={loading}
+              className="w-full py-3 rounded-xl bg-gradient-to-r from-primary to-accent text-card font-semibold text-base hover:scale-[1.02] hover:shadow-lg hover:shadow-primary/20 transition-all flex items-center justify-center gap-2 mt-4 disabled:opacity-50"
             >
-              <Send className="w-4 h-4" /> Submit Registration
+              {loading ? <Loader2 className="w-4 h-4 animate-spin" /> : <Send className="w-4 h-4" />}
+              {loading ? "Submitting..." : "Submit Registration"}
             </button>
           </form>
         </motion.div>
