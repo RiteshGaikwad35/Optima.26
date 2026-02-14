@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 const sponsorshipTiers = [
   {
     tier: "Platinum",
-    emoji: "💎",
+    emoji: "",
     amount: "₹40,000/-",
     icon: Gem,
     gradient: "from-violet-400 via-purple-500 to-indigo-600",
@@ -46,7 +46,7 @@ const sponsorshipTiers = [
   },
   {
     tier: "Gold",
-    emoji: "🏆",
+    emoji: "",
     amount: "₹20,000/-",
     icon: Crown,
     gradient: "from-yellow-400 via-amber-500 to-yellow-600",
@@ -79,7 +79,7 @@ const sponsorshipTiers = [
   },
   {
     tier: "Silver",
-    emoji: "🥈",
+    emoji: "",
     amount: "₹10,000/-",
     icon: Star,
     gradient: "from-slate-300 via-gray-400 to-slate-500",
@@ -115,7 +115,7 @@ const sponsorshipTiers = [
   },
   {
     tier: "Bronze",
-    emoji: "🥉",
+    emoji: "",
     amount: "₹5,000/-",
     icon: Award,
     gradient: "from-orange-400 via-amber-600 to-orange-700",
