@@ -10,7 +10,7 @@ const announcements = [
   {
     icon: Clock,
     text: "Event Dates: Dates Announced soon. Follow us on Instagram to stay updated",
-    link: "https://www.instagram.com/optima24_nitt/",
+    link: "https://www.instagram.com/optima_nitt/",
     linkIcon: Instagram,
   },
   {

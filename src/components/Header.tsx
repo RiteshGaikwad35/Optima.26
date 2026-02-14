@@ -123,13 +123,20 @@ const Header = () => {
                 <div className="w-full h-full rounded-full bg-[#002366]" />
               </motion.div>
               
-              <div className="relative w-12 h-12 sm:w-16 sm:h-16 md:w-20 md:h-20 lg:w-24 lg:h-24 rounded-full bg-gradient-to-br from-white/15 to-white/5 backdrop-blur-md flex items-center justify-center shadow-lg border border-white/20 overflow-hidden transition-transform duration-300 group-hover:scale-105">
-                <img
-                  src="/favicon.png"
-                  alt="OPTIMA Logo"
-                  className="w-8 h-8 sm:w-12 sm:h-12 md:w-16 md:h-16 lg:w-20 lg:h-20 object-contain drop-shadow-lg"
-                />
-              </div>
+              <div className="relative w-12 h-12 sm:w-16 sm:h-16 md:w-20 md:h-20 lg:w-24 lg:h-24 
+  rounded-full bg-gradient-to-br from-white/15 to-white/5 
+  backdrop-blur-md flex items-center justify-center 
+  shadow-lg border border-white/20 overflow-hidden 
+  transition-transform duration-300 group-hover:scale-105">
+
+  <img
+    src="/favicon.png"
+    alt="OPTIMA Logo"
+    className="w-full h-full object-cover"
+  />
+
+</div>
+
             </div>
           </motion.div>
         </div>
