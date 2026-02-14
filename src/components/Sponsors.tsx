@@ -147,16 +147,6 @@ const sponsorshipTiers = [
 ];
 
 const additionalTiers = [
-  {
-    title: "Event Sponsorship",
-    description: "Cover the prize money for an entire event",
-    icon: Gift,
-  },
-  {
-    title: "Batch/Solo Sponsorship",
-    description: "A collective sponsorship by a batch or individually",
-    icon: Users,
-  },
 ];
 
 const Sponsors = () => {
