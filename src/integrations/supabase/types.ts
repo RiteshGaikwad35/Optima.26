@@ -14,16 +14,521 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      otp_verifications: {
+        Row: {
+          created_at: string
+          expires_at: string
+          id: string
+          mobile_no: string
+          otp: string
+          verified: boolean
+        }
+        Insert: {
+          created_at?: string
+          expires_at?: string
+          id?: string
+          mobile_no: string
+          otp: string
+          verified?: boolean
+        }
+        Update: {
+          created_at?: string
+          expires_at?: string
+          id?: string
+          mobile_no?: string
+          otp?: string
+          verified?: boolean
+        }
+        Relationships: []
+      }
+      participants: {
+        Row: {
+          accommodation: string | null
+          age: number | null
+          audit_paid_amount: number | null
+          cancellation_reason: string | null
+          cancelled_at: string | null
+          cash_paid: number | null
+          created_at: string
+          first_installment: number | null
+          gender: string | null
+          hotel_name: string | null
+          id: string
+          is_bogie_sevak: boolean | null
+          is_cancelled: boolean | null
+          is_ticket_sevak: boolean | null
+          mobile_no: string
+          name: string
+          name_surname_first: string | null
+          onward_berth: string | null
+          onward_bogie_no: string | null
+          onward_seat_no: string | null
+          onward_tkt_no: string | null
+          paid_by_mobile: string | null
+          paid_by_name: string | null
+          payment_confirmed: boolean | null
+          payment_confirmed_at: string | null
+          payment_mode: string | null
+          razorpay_payment_id: string | null
+          reach_to_pune: string | null
+          refund_amount: number | null
+          representative: string | null
+          return_berth: string | null
+          return_bogie_no: string | null
+          return_seat_no: string | null
+          return_tkt_no: string | null
+          room_no: string | null
+          to_whom: string | null
+          to_whom_1st: string | null
+          to_whom_2nd: string | null
+          total_charges: number | null
+          train: string | null
+          updated_at: string
+        }
+        Insert: {
+          accommodation?: string | null
+          age?: number | null
+          audit_paid_amount?: number | null
+          cancellation_reason?: string | null
+          cancelled_at?: string | null
+          cash_paid?: number | null
+          created_at?: string
+          first_installment?: number | null
+          gender?: string | null
+          hotel_name?: string | null
+          id?: string
+          is_bogie_sevak?: boolean | null
+          is_cancelled?: boolean | null
+          is_ticket_sevak?: boolean | null
+          mobile_no: string
+          name: string
+          name_surname_first?: string | null
+          onward_berth?: string | null
+          onward_bogie_no?: string | null
+          onward_seat_no?: string | null
+          onward_tkt_no?: string | null
+          paid_by_mobile?: string | null
+          paid_by_name?: string | null
+          payment_confirmed?: boolean | null
+          payment_confirmed_at?: string | null
+          payment_mode?: string | null
+          razorpay_payment_id?: string | null
+          reach_to_pune?: string | null
+          refund_amount?: number | null
+          representative?: string | null
+          return_berth?: string | null
+          return_bogie_no?: string | null
+          return_seat_no?: string | null
+          return_tkt_no?: string | null
+          room_no?: string | null
+          to_whom?: string | null
+          to_whom_1st?: string | null
+          to_whom_2nd?: string | null
+          total_charges?: number | null
+          train?: string | null
+          updated_at?: string
+        }
+        Update: {
+          accommodation?: string | null
+          age?: number | null
+          audit_paid_amount?: number | null
+          cancellation_reason?: string | null
+          cancelled_at?: string | null
+          cash_paid?: number | null
+          created_at?: string
+          first_installment?: number | null
+          gender?: string | null
+          hotel_name?: string | null
+          id?: string
+          is_bogie_sevak?: boolean | null
+          is_cancelled?: boolean | null
+          is_ticket_sevak?: boolean | null
+          mobile_no?: string
+          name?: string
+          name_surname_first?: string | null
+          onward_berth?: string | null
+          onward_bogie_no?: string | null
+          onward_seat_no?: string | null
+          onward_tkt_no?: string | null
+          paid_by_mobile?: string | null
+          paid_by_name?: string | null
+          payment_confirmed?: boolean | null
+          payment_confirmed_at?: string | null
+          payment_mode?: string | null
+          razorpay_payment_id?: string | null
+          reach_to_pune?: string | null
+          refund_amount?: number | null
+          representative?: string | null
+          return_berth?: string | null
+          return_bogie_no?: string | null
+          return_seat_no?: string | null
+          return_tkt_no?: string | null
+          room_no?: string | null
+          to_whom?: string | null
+          to_whom_1st?: string | null
+          to_whom_2nd?: string | null
+          total_charges?: number | null
+          train?: string | null
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      participants_backup: {
+        Row: {
+          accommodation: string | null
+          age: number | null
+          audit_paid_amount: number | null
+          backup_date: string
+          backup_name: string
+          cancellation_reason: string | null
+          cancelled_at: string | null
+          cash_paid: number | null
+          created_at: string
+          first_installment: number | null
+          gender: string | null
+          hotel_name: string | null
+          id: string
+          is_bogie_sevak: boolean | null
+          is_cancelled: boolean | null
+          is_ticket_sevak: boolean | null
+          mobile_no: string
+          name: string
+          name_surname_first: string | null
+          onward_berth: string | null
+          onward_bogie_no: string | null
+          onward_seat_no: string | null
+          onward_tkt_no: string | null
+          original_created_at: string | null
+          original_id: string | null
+          original_updated_at: string | null
+          paid_by_mobile: string | null
+          paid_by_name: string | null
+          payment_confirmed: boolean | null
+          payment_confirmed_at: string | null
+          payment_mode: string | null
+          razorpay_payment_id: string | null
+          reach_to_pune: string | null
+          refund_amount: number | null
+          representative: string | null
+          return_berth: string | null
+          return_bogie_no: string | null
+          return_seat_no: string | null
+          return_tkt_no: string | null
+          room_no: string | null
+          to_whom: string | null
+          to_whom_1st: string | null
+          to_whom_2nd: string | null
+          total_charges: number | null
+          train: string | null
+        }
+        Insert: {
+          accommodation?: string | null
+          age?: number | null
+          audit_paid_amount?: number | null
+          backup_date?: string
+          backup_name: string
+          cancellation_reason?: string | null
+          cancelled_at?: string | null
+          cash_paid?: number | null
+          created_at?: string
+          first_installment?: number | null
+          gender?: string | null
+          hotel_name?: string | null
+          id?: string
+          is_bogie_sevak?: boolean | null
+          is_cancelled?: boolean | null
+          is_ticket_sevak?: boolean | null
+          mobile_no: string
+          name: string
+          name_surname_first?: string | null
+          onward_berth?: string | null
+          onward_bogie_no?: string | null
+          onward_seat_no?: string | null
+          onward_tkt_no?: string | null
+          original_created_at?: string | null
+          original_id?: string | null
+          original_updated_at?: string | null
+          paid_by_mobile?: string | null
+          paid_by_name?: string | null
+          payment_confirmed?: boolean | null
+          payment_confirmed_at?: string | null
+          payment_mode?: string | null
+          razorpay_payment_id?: string | null
+          reach_to_pune?: string | null
+          refund_amount?: number | null
+          representative?: string | null
+          return_berth?: string | null
+          return_bogie_no?: string | null
+          return_seat_no?: string | null
+          return_tkt_no?: string | null
+          room_no?: string | null
+          to_whom?: string | null
+          to_whom_1st?: string | null
+          to_whom_2nd?: string | null
+          total_charges?: number | null
+          train?: string | null
+        }
+        Update: {
+          accommodation?: string | null
+          age?: number | null
+          audit_paid_amount?: number | null
+          backup_date?: string
+          backup_name?: string
+          cancellation_reason?: string | null
+          cancelled_at?: string | null
+          cash_paid?: number | null
+          created_at?: string
+          first_installment?: number | null
+          gender?: string | null
+          hotel_name?: string | null
+          id?: string
+          is_bogie_sevak?: boolean | null
+          is_cancelled?: boolean | null
+          is_ticket_sevak?: boolean | null
+          mobile_no?: string
+          name?: string
+          name_surname_first?: string | null
+          onward_berth?: string | null
+          onward_bogie_no?: string | null
+          onward_seat_no?: string | null
+          onward_tkt_no?: string | null
+          original_created_at?: string | null
+          original_id?: string | null
+          original_updated_at?: string | null
+          paid_by_mobile?: string | null
+          paid_by_name?: string | null
+          payment_confirmed?: boolean | null
+          payment_confirmed_at?: string | null
+          payment_mode?: string | null
+          razorpay_payment_id?: string | null
+          reach_to_pune?: string | null
+          refund_amount?: number | null
+          representative?: string | null
+          return_berth?: string | null
+          return_bogie_no?: string | null
+          return_seat_no?: string | null
+          return_tkt_no?: string | null
+          room_no?: string | null
+          to_whom?: string | null
+          to_whom_1st?: string | null
+          to_whom_2nd?: string | null
+          total_charges?: number | null
+          train?: string | null
+        }
+        Relationships: []
+      }
+      registrations: {
+        Row: {
+          college_name: string
+          created_at: string
+          date_of_birth: string | null
+          district: string | null
+          education: string | null
+          email_id: string | null
+          full_address: string | null
+          full_name: string | null
+          id: string
+          other_contact: string | null
+          payment_screenshot_url: string | null
+          payment_status: string | null
+          payment_verified_at: string | null
+          payment_verified_by: string | null
+          registration_type: string
+          selected_competitions: string[] | null
+          team_competition: string | null
+          team_leader_name: string | null
+          team_leader_whatsapp: string | null
+          team_members: Json | null
+          team_name: string | null
+          updated_at: string
+          whatsapp_number: string
+        }
+        Insert: {
+          college_name: string
+          created_at?: string
+          date_of_birth?: string | null
+          district?: string | null
+          education?: string | null
+          email_id?: string | null
+          full_address?: string | null
+          full_name?: string | null
+          id?: string
+          other_contact?: string | null
+          payment_screenshot_url?: string | null
+          payment_status?: string | null
+          payment_verified_at?: string | null
+          payment_verified_by?: string | null
+          registration_type: string
+          selected_competitions?: string[] | null
+          team_competition?: string | null
+          team_leader_name?: string | null
+          team_leader_whatsapp?: string | null
+          team_members?: Json | null
+          team_name?: string | null
+          updated_at?: string
+          whatsapp_number: string
+        }
+        Update: {
+          college_name?: string
+          created_at?: string
+          date_of_birth?: string | null
+          district?: string | null
+          education?: string | null
+          email_id?: string | null
+          full_address?: string | null
+          full_name?: string | null
+          id?: string
+          other_contact?: string | null
+          payment_screenshot_url?: string | null
+          payment_status?: string | null
+          payment_verified_at?: string | null
+          payment_verified_by?: string | null
+          registration_type?: string
+          selected_competitions?: string[] | null
+          team_competition?: string | null
+          team_leader_name?: string | null
+          team_leader_whatsapp?: string | null
+          team_members?: Json | null
+          team_name?: string | null
+          updated_at?: string
+          whatsapp_number?: string
+        }
+        Relationships: []
+      }
+      user_roles: {
+        Row: {
+          created_at: string
+          id: string
+          role: Database["public"]["Enums"]["app_role"]
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          role?: Database["public"]["Enums"]["app_role"]
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          role?: Database["public"]["Enums"]["app_role"]
+          user_id?: string
+        }
+        Relationships: []
+      }
+      volunteers: {
+        Row: {
+          blood_group: string
+          class_year: string
+          complete_address: string
+          created_at: string
+          district: string
+          domain: string
+          education: string
+          email: string
+          full_name: string
+          id: string
+          mobile_number: string
+          referral_source: string | null
+          search_name: string
+          taluka: string
+          tshirt_size: string
+          updated_at: string
+          whatsapp_number: string
+        }
+        Insert: {
+          blood_group: string
+          class_year: string
+          complete_address: string
+          created_at?: string
+          district: string
+          domain: string
+          education: string
+          email: string
+          full_name: string
+          id?: string
+          mobile_number: string
+          referral_source?: string | null
+          search_name: string
+          taluka: string
+          tshirt_size: string
+          updated_at?: string
+          whatsapp_number: string
+        }
+        Update: {
+          blood_group?: string
+          class_year?: string
+          complete_address?: string
+          created_at?: string
+          district?: string
+          domain?: string
+          education?: string
+          email?: string
+          full_name?: string
+          id?: string
+          mobile_number?: string
+          referral_source?: string | null
+          search_name?: string
+          taluka?: string
+          tshirt_size?: string
+          updated_at?: string
+          whatsapp_number?: string
+        }
+        Relationships: []
+      }
+      yatra_details: {
+        Row: {
+          content: string | null
+          created_at: string
+          created_by: string | null
+          id: string
+          image_url: string | null
+          is_active: boolean | null
+          priority: number | null
+          title: string
+          updated_at: string
+        }
+        Insert: {
+          content?: string | null
+          created_at?: string
+          created_by?: string | null
+          id?: string
+          image_url?: string | null
+          is_active?: boolean | null
+          priority?: number | null
+          title: string
+          updated_at?: string
+        }
+        Update: {
+          content?: string | null
+          created_at?: string
+          created_by?: string | null
+          id?: string
+          image_url?: string | null
+          is_active?: boolean | null
+          priority?: number | null
+          title?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      has_role: {
+        Args: {
+          _role: Database["public"]["Enums"]["app_role"]
+          _user_id: string
+        }
+        Returns: boolean
+      }
+      is_admin: { Args: { _user_id: string }; Returns: boolean }
+      is_super_admin: { Args: { _user_id: string }; Returns: boolean }
     }
     Enums: {
-      [_ in never]: never
+      app_role: "super_admin" | "admin" | "user"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -150,6 +655,8 @@ export type CompositeTypes<
 
 export const Constants = {
   public: {
-    Enums: {},
+    Enums: {
+      app_role: ["super_admin", "admin", "user"],
+    },
   },
 } as const
