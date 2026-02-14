@@ -16,14 +16,13 @@ const sponsorshipTiers = [
     textColor: "text-violet-400",
     ringColor: "ring-violet-500/40",
     subtitle: "Premium Partnership Investment",
-    impressions: "40,000+",
     tagline: "Maximum visibility & brand dominance",
     sections: [
       {
         title: "Prime Branding Rights",
         items: [
           'Logo on customized banner in Barn Hall (20ft x 10ft)',
-          'Premium banner at college main gate (15,000+ daily exposure)',
+          'Premium banner at college main gate',
           'Logo as "Platinum Sponsor" on all materials',
         ],
       },
@@ -39,7 +38,7 @@ const sponsorshipTiers = [
       {
         title: "On-Campus Visibility",
         items: [
-          'Logo on event T-shirts - Front/Back (500+ shirts distributed)',
+          'Logo on event T-shirts - Front/Back',
         ],
       },
     ],
@@ -56,23 +55,21 @@ const sponsorshipTiers = [
     textColor: "text-yellow-400",
     ringColor: "ring-yellow-500/40",
     subtitle: "Strategic Partnership Investment",
-    impressions: "20,000+",
     tagline: "Strategic branding & prize association",
     sections: [
       {
         title: "Significant Branding",
         items: [
           'Banner at college main gate (shared placement)',
-          'Logo as "Gold Sponsor" on materials',
+          'Logo On 2/3 Event poster',
           'Banners at strategic venue points',
-          'Logo on event T-shirts - Small placement (200+ shirts)',
+          'Logo on event T-shirts - Small placement',
         ],
       },
       {
         title: "Prize Association",
         items: [
           'Co-branding on 2 specific event prizes',
-          'Brand mention during prize distribution',
         ],
       },
     ],
@@ -89,7 +86,6 @@ const sponsorshipTiers = [
     textColor: "text-slate-300",
     ringColor: "ring-slate-400/40",
     subtitle: "Growth Partnership Investment",
-    impressions: "10,000+",
     tagline: "Growing visibility & on-ground presence",
     sections: [
       {
@@ -102,7 +98,7 @@ const sponsorshipTiers = [
       {
         title: "On-Ground Presence",
         items: [
-          'Logo on event T-shirts - Small placement (200+ shirts)',
+          'Logo on event T-shirts - Small placement',
         ],
       },
       {
@@ -128,12 +124,6 @@ const sponsorshipTiers = [
     impressions: "",
     tagline: "Digital acknowledgment & brand presence",
     sections: [
-      {
-        title: "Essential Branding",
-        items: [
-          'Logo as "Bronze Sponsor"',
-        ],
-      },
       {
         title: "Digital Acknowledgment",
         items: [
@@ -413,12 +403,12 @@ const Sponsors = () => {
               <span className="text-sm sm:text-base text-muted-foreground">For inquiries, contact us:</span>
             </div>
             <div className="flex items-center gap-3 sm:gap-4 flex-wrap justify-center">
-              <a href="tel:8639409862" className="text-base sm:text-lg font-semibold text-primary hover:text-primary/80 transition-colors">
-                8639409862
+              <a href="tel:8077863867" className="text-base sm:text-lg font-semibold text-primary hover:text-primary/80 transition-colors">
+                8077863867
               </a>
               <span className="text-muted-foreground hidden sm:inline">or</span>
-              <a href="tel:8008652561" className="text-base sm:text-lg font-semibold text-primary hover:text-primary/80 transition-colors">
-                8008652561
+              <a href="tel:9390193070" className="text-base sm:text-lg font-semibold text-primary hover:text-primary/80 transition-colors">
+                9390193070
               </a>
             </div>
           </div>

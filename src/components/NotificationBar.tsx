@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { Bell, Calendar, Clock } from "lucide-react";
+import { Bell, Calendar, Clock, Instagram } from "lucide-react";
 
 const announcements = [
   {
@@ -9,11 +9,9 @@ const announcements = [
   },
   {
     icon: Clock,
-    text: "Event Dates: FEB 21, 2026 | NIT Trichy Campus",
-  },
-  {
-    icon: Bell,
-    text: "Prize Pool worth ₹1,00,000+ | Register now to participate in exciting competitions",
+    text: "Event Dates: Dates Announced soon. Follow us on Instagram to stay updated",
+    link: "https://www.instagram.com/optima24_nitt/",
+    linkIcon: Instagram,
   },
   {
     icon: Calendar,
@@ -24,7 +22,6 @@ const announcements = [
 const NotificationBar = () => {
   const [isPaused, setIsPaused] = useState(false);
 
-  // Duplicate announcements for seamless loop
   const duplicatedAnnouncements = [...announcements, ...announcements];
 
   return (
@@ -47,7 +44,6 @@ const NotificationBar = () => {
               ease: "linear",
             },
           }}
-          style={{ x: isPaused ? undefined : 0 }}
         >
           {duplicatedAnnouncements.map((announcement, index) => (
             <div
@@ -55,7 +51,21 @@ const NotificationBar = () => {
               className="flex items-center gap-2 text-sm text-foreground/90"
             >
               <announcement.icon className="w-4 h-4 text-primary flex-shrink-0" />
+              
               <span>{announcement.text}</span>
+
+              {announcement.link && announcement.linkIcon && (
+                <a
+                  href={announcement.link}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-1 text-primary hover:text-accent transition-colors duration-200"
+                >
+                  <announcement.linkIcon className="w-4 h-4" />
+                  <span className="underline">Insta</span>
+                </a>
+              )}
+
               <span className="mx-8 text-primary/50">•</span>
             </div>
           ))}
