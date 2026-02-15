@@ -7,6 +7,8 @@ import Index from "./pages/Index";
 import RegisterSponsorship from "./pages/RegisterSponsorship";
 import RegisterEvent from "./pages/RegisterEvent";
 import AdminPanel from "./pages/AdminPanel";
+import AdminEvents from "./pages/AdminEvents";
+import AdminSponsors from "./pages/AdminSponsors";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -22,6 +24,8 @@ const App = () => (
           <Route path="/register-sponsorship" element={<RegisterSponsorship />} />
           <Route path="/register-event" element={<RegisterEvent />} />
           <Route path="/admin" element={<AdminPanel />} />
+          <Route path="/admin/events" element={<AdminEvents />} />
+          <Route path="/admin/sponsors" element={<AdminSponsors />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
