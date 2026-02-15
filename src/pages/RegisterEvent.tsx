@@ -47,15 +47,15 @@ const RegisterEvent = () => {
     }
     setLoading(true);
     try {
-      const { error } = await supabase.from("registrations").insert({
-        registration_type: "event",
+      const { error } = await supabase.from("event_registrations").insert({
         full_name: form.name,
-        whatsapp_number: form.mobile,
-        email_id: form.email,
-        college_name: form.college || form.branch,
-        district: form.branch,
-        education: form.year ? `Year ${form.year}` : null,
-        selected_competitions: eventId ? [eventId] : [],
+        mobile: form.mobile,
+        email: form.email,
+        branch: form.branch,
+        college: form.college || null,
+        year_of_study: form.year || null,
+        event_id: eventId,
+        event_name: eventName,
       });
       if (error) throw error;
       setSubmitted(true);
