@@ -71,7 +71,8 @@ const Index = () => {
       {/* Tab Navigation - Fixed below header */}
       <TabNavigation activeSection={activeSection} onSectionChange={handleSectionChange} />
 
-      {/* Notification Bar */}
+      {/* Spacing + Notification Bar */}
+      <div className="mt-2" />
       <NotificationBar />
 
       {/* Split Hero Section - Always Visible */}
