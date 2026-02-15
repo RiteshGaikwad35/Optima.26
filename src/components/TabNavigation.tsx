@@ -19,7 +19,7 @@ const tabs: { name: string; section: Section }[] = [
 
 const TabNavigation = ({ activeSection, onSectionChange }: TabNavigationProps) => {
   return (
-    <nav className="bg-card/95 backdrop-blur-lg border-b border-border/50 sticky top-[80px] sm:top-[90px] md:top-[100px] z-40 shadow-sm">
+    <nav className="bg-card/95 backdrop-blur-lg border-b border-border/50 fixed top-[80px] sm:top-[90px] md:top-[100px] left-0 right-0 z-40 shadow-sm">
       <div className="container mx-auto px-2 sm:px-4">
         <div className="flex items-center justify-start sm:justify-center gap-0.5 sm:gap-1 md:gap-3 overflow-x-auto scrollbar-hide py-2 sm:py-3 -mx-2 px-2">
           {tabs.map((tab) => (

@@ -65,10 +65,10 @@ const Index = () => {
       {/* Fixed Header */}
       <Header />
 
-      {/* Spacer for fixed header */}
-      <div className="h-[80px] sm:h-[90px] md:h-[100px]" />
+      {/* Spacer for fixed header + tab nav */}
+      <div className="h-[130px] sm:h-[145px] md:h-[160px]" />
 
-      {/* Tab Navigation - Sticky below header */}
+      {/* Tab Navigation - Fixed below header */}
       <TabNavigation activeSection={activeSection} onSectionChange={handleSectionChange} />
 
       {/* Notification Bar */}
