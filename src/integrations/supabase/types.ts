@@ -14,6 +14,48 @@ export type Database = {
   }
   public: {
     Tables: {
+      event_registrations: {
+        Row: {
+          branch: string | null
+          college: string | null
+          created_at: string
+          email: string | null
+          event_id: string
+          event_name: string | null
+          full_name: string
+          id: string
+          mobile: string
+          updated_at: string
+          year_of_study: string | null
+        }
+        Insert: {
+          branch?: string | null
+          college?: string | null
+          created_at?: string
+          email?: string | null
+          event_id: string
+          event_name?: string | null
+          full_name: string
+          id?: string
+          mobile: string
+          updated_at?: string
+          year_of_study?: string | null
+        }
+        Update: {
+          branch?: string | null
+          college?: string | null
+          created_at?: string
+          email?: string | null
+          event_id?: string
+          event_name?: string | null
+          full_name?: string
+          id?: string
+          mobile?: string
+          updated_at?: string
+          year_of_study?: string | null
+        }
+        Relationships: []
+      }
       otp_verifications: {
         Row: {
           created_at: string
@@ -392,6 +434,48 @@ export type Database = {
           team_name?: string | null
           updated_at?: string
           whatsapp_number?: string
+        }
+        Relationships: []
+      }
+      sponsorship_registrations: {
+        Row: {
+          company_name: string | null
+          created_at: string
+          email: string | null
+          full_name: string
+          id: string
+          is_company: boolean | null
+          mobile: string
+          payment_screenshot_url: string | null
+          payment_status: string | null
+          sponsorship_type: string
+          updated_at: string
+        }
+        Insert: {
+          company_name?: string | null
+          created_at?: string
+          email?: string | null
+          full_name: string
+          id?: string
+          is_company?: boolean | null
+          mobile: string
+          payment_screenshot_url?: string | null
+          payment_status?: string | null
+          sponsorship_type: string
+          updated_at?: string
+        }
+        Update: {
+          company_name?: string | null
+          created_at?: string
+          email?: string | null
+          full_name?: string
+          id?: string
+          is_company?: boolean | null
+          mobile?: string
+          payment_screenshot_url?: string | null
+          payment_status?: string | null
+          sponsorship_type?: string
+          updated_at?: string
         }
         Relationships: []
       }

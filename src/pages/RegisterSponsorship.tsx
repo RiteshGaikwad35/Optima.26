@@ -45,7 +45,6 @@ const RegisterSponsorship = () => {
     try {
       let screenshotUrl: string | null = null;
 
-      // Upload payment screenshot if provided
       if (file) {
         const fileExt = file.name.split(".").pop();
         const filePath = `sponsorship/${Date.now()}.${fileExt}`;
@@ -59,13 +58,13 @@ const RegisterSponsorship = () => {
         screenshotUrl = urlData.publicUrl;
       }
 
-      const { error } = await supabase.from("registrations").insert({
-        registration_type: "sponsorship",
+      const { error } = await supabase.from("sponsorship_registrations").insert({
         full_name: formData.name,
-        whatsapp_number: formData.mobile,
-        email_id: formData.email,
-        college_name: isCompany ? formData.companyName : "Individual",
-        team_competition: formData.sponsorshipType,
+        mobile: formData.mobile,
+        email: formData.email,
+        company_name: isCompany ? formData.companyName : null,
+        is_company: isCompany,
+        sponsorship_type: formData.sponsorshipType,
         payment_screenshot_url: screenshotUrl,
       });
       if (error) throw error;
@@ -81,13 +80,9 @@ const RegisterSponsorship = () => {
 
   return (
     <div className="min-h-screen bg-background text-foreground">
-      {/* Header */}
       <div className="sticky top-0 z-50 bg-background/80 backdrop-blur-xl border-b border-border/50">
         <div className="container mx-auto px-4 py-4 flex items-center gap-3">
-          <button
-            onClick={() => navigate("/")}
-            className="p-2 rounded-xl hover:bg-secondary transition-colors"
-          >
+          <button onClick={() => navigate("/")} className="p-2 rounded-xl hover:bg-secondary transition-colors">
             <ArrowLeft className="w-5 h-5" />
           </button>
           <h1 className="font-display font-bold text-lg sm:text-xl">Register Sponsorship</h1>
@@ -95,7 +90,6 @@ const RegisterSponsorship = () => {
       </div>
 
       <div className="container mx-auto px-4 py-8 sm:py-12 max-w-2xl">
-        {/* QR Code Section */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -112,21 +106,16 @@ const RegisterSponsorship = () => {
               <span className="text-sm text-muted-foreground">Scan to Pay</span>
             </div>
           </div>
-          <p className="text-sm text-muted-foreground">
-            Scan the QR code to make payment, then fill the form below.
-          </p>
+          <p className="text-sm text-muted-foreground">Scan the QR code to make payment, then fill the form below.</p>
         </motion.div>
 
-        {/* Registration Form */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.2 }}
           className="glass-card-elevated rounded-2xl sm:rounded-3xl p-6 sm:p-8 border border-primary/20"
         >
-          <h2 className="text-xl sm:text-2xl font-display font-bold text-center mb-6">
-            Register for Sponsorship
-          </h2>
+          <h2 className="text-xl sm:text-2xl font-display font-bold text-center mb-6">Register for Sponsorship</h2>
 
           <form onSubmit={handleSubmit} className="space-y-5">
             <div>
