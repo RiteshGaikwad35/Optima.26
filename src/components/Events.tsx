@@ -39,7 +39,7 @@ const events: EventData[] = [
     tagline: "Inter-College ML Hackathon",
     description: "An inter-college Machine Learning hackathon emphasizing analytical thinking, model development, and data-driven problem solving.",
     teamSize: "2–4 members",
-    prizePool: "₹4,000+",
+    prizePool: "₹5,000+",
     fee: "Free",
     color: "from-violet-500/20 to-purple-500/20",
     borderColor: "hover:border-violet-500/40",
@@ -62,7 +62,7 @@ const events: EventData[] = [
       "Judges' decision is final"
     ],
     prizes: [
-      { label: "Prize Pool", amount: "₹4,000+" },
+      { label: "Prize Pool", amount: "₹5,000+" },
       { label: "Extras", amount: "Merch, Certificates, Mentorship" }
     ]
   },
@@ -73,7 +73,7 @@ const events: EventData[] = [
     tagline: "BGMI Inter-College Tournament",
     description: "Battlegrounds Mobile India inter-college tournament with qualifier, semi-final, and grand finale rounds.",
     teamSize: "4 players (+1 sub)",
-    prizePool: "₹4,500",
+    prizePool: "₹5,000",
     fee: "₹100/team",
     color: "from-red-500/20 to-orange-500/20",
     borderColor: "hover:border-red-500/40",
@@ -126,7 +126,7 @@ const events: EventData[] = [
     tagline: "Two-Word Tech Guessing Challenge",
     description: "A fast-paced guessing game – one teammate gives only two-word clues while the other guesses tech terms displayed on screen.",
     teamSize: "2 per team",
-    prizePool: "₹3,000",
+    prizePool: "₹5,000",
     fee: "Free",
     color: "from-cyan-500/20 to-teal-500/20",
     borderColor: "hover:border-cyan-500/40",
@@ -142,8 +142,8 @@ const events: EventData[] = [
       "Guesser must not see the screen"
     ],
     prizes: [
-      { label: "Winner", amount: "₹2,000 + Certificates" },
-      { label: "Runner-Up", amount: "₹1,000 + Certificates" }
+      { label: "Winner", amount: "₹3,000 + Certificates" },
+      { label: "Runner-Up", amount: "₹2,000 + Certificates" }
     ]
   },
   {
@@ -153,7 +153,7 @@ const events: EventData[] = [
     tagline: "Inter-College Tech Knowledge Challenge",
     description: "A multi-round quiz covering programming, OS, DBMS, networks, algorithms, AI/ML basics, and emerging tech trends.",
     teamSize: "2–3 members",
-    prizePool: "₹2,000",
+    prizePool: "₹5,000",
     fee: "Free",
     color: "from-blue-500/20 to-indigo-500/20",
     borderColor: "hover:border-blue-500/40",
@@ -169,9 +169,9 @@ const events: EventData[] = [
       "Quizmaster's decision is final"
     ],
     prizes: [
-      { label: "1st", amount: "₹1,000" },
-      { label: "2nd", amount: "₹700" },
-      { label: "3rd", amount: "₹300" }
+      { label: "1st", amount: "₹2,500" },
+      { label: "2nd", amount: "₹1,500" },
+      { label: "3rd", amount: "₹1,000" }
     ]
   },
   {
@@ -181,7 +181,7 @@ const events: EventData[] = [
     tagline: "UI/UX & Website Design Challenge",
     description: "Design and build visually appealing, functional websites from a given theme – judged on creativity, UX, and responsiveness.",
     teamSize: "2–4 members",
-    prizePool: "₹3,000",
+    prizePool: "₹5,000",
     fee: "Free",
     color: "from-pink-500/20 to-rose-500/20",
     borderColor: "hover:border-pink-500/40",
@@ -197,9 +197,9 @@ const events: EventData[] = [
       "Must explain design choices", "Plagiarism → disqualification"
     ],
     prizes: [
-      { label: "1st", amount: "₹1,500" },
-      { label: "2nd", amount: "₹1,000" },
-      { label: "3rd", amount: "₹500" }
+      { label: "1st", amount: "₹2,500" },
+      { label: "2nd", amount: "₹1,500" },
+      { label: "3rd", amount: "₹1000" }
     ]
   },
   {
@@ -209,7 +209,7 @@ const events: EventData[] = [
     tagline: "Programming & Debugging Competition",
     description: "Test your coding and debugging skills through normal coding, C-language debugging, and a surprise blind coding round.",
     teamSize: "2 members",
-    prizePool: "₹3,000",
+    prizePool: "₹5,000",
     fee: "Free",
     color: "from-emerald-500/20 to-green-500/20",
     borderColor: "hover:border-emerald-500/40",
@@ -224,9 +224,9 @@ const events: EventData[] = [
       "Judges' decision is final"
     ],
     prizes: [
-      { label: "1st", amount: "₹1,500" },
-      { label: "2nd", amount: "₹1,000" },
-      { label: "3rd", amount: "₹500" }
+      { label: "1st", amount: "₹2,500" },
+      { label: "2nd", amount: "₹1,500" },
+      { label: "3rd", amount: "₹1000" }
     ]
   },
   {

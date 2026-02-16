@@ -4,12 +4,8 @@ import { Bell, Calendar, Clock, Instagram } from "lucide-react";
 
 const announcements = [
   {
-    icon: Calendar,
-    text: "OPTIMA 2026 Registration Now Open! Early bird deadline: Feb 21st, 2026",
-  },
-  {
     icon: Clock,
-    text: "Event Dates: Dates Announced soon. Follow us on Instagram to stay updated",
+    text: "Event Dates: Dates will Announced soon. Follow us on Instagram to stay updated",
     link: "https://www.instagram.com/optima_nitt/",
     linkIcon: Instagram,
   },
