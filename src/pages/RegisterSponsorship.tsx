@@ -101,10 +101,11 @@ const RegisterSponsorship = () => {
             <h2 className="text-xl sm:text-2xl font-display font-bold">Payment QR Code</h2>
           </div>
           <div className="mx-auto w-48 h-48 sm:w-56 sm:h-56 bg-white rounded-2xl shadow-lg flex items-center justify-center mb-4 border-4 border-primary/20">
-            <div className="text-center p-4">
-              <QrCode className="w-16 h-16 text-muted-foreground mx-auto mb-2" />
-              <span className="text-sm text-muted-foreground">Scan to Pay</span>
-            </div>
+            <img
+    src="/payment.jpeg"
+    alt="Payment QR Code"
+    className="w-full h-full object-contain p-3"
+  />
           </div>
           <p className="text-sm text-muted-foreground">Scan the QR code to make payment, then fill the form below.</p>
         </motion.div>
