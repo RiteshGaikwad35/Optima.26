@@ -47,7 +47,7 @@ const teamMembers = [
     github: "https://github.com/RiteshGaikwad35",
   },
   {
-    name: "Arjun",
+    name: "Arjun Chaudhary",
     role: "Executive Lead",
     subtitle: "M.Sc Computer Science",
     image: "/team/arjun.jpeg",
@@ -55,7 +55,7 @@ const teamMembers = [
     linkedin: "https://www.linkedin.com/in/arjun-chaudhary-482399185/",
   },
   {
-    name: "Shamas",
+    name: "Muhammed Shammas CA",
     role: "PR Lead",
     subtitle: "M.Sc Computer Science",
     image: "/team/shamas.jpeg",
@@ -64,7 +64,7 @@ const teamMembers = [
     github: "https://github.com/shammasca313grabs-dot",
   },
   {
-    name: "Amal",
+    name: "Amal Waghas E",
     role: "Design Lead",
     subtitle: "M.Tech Data Analytics",
     image: "/team/Amal.jpeg",
