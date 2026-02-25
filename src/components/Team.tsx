@@ -331,7 +331,7 @@ const Team = () => {
         </PremiumSection>
 
         {/* Other Members */}
-        <PremiumSection title="Members">
+        <PremiumSection title="Team Leaders">
           <motion.div
             variants={containerVariants}
             initial="hidden"
